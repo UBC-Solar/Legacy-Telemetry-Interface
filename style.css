@@ -8,16 +8,17 @@ body, html {
 /* Styling the sidebar */
   .sidenav {
     height: 100%;
-    width: 160px;
+    width: 15%;
     z-index: 1;
     background-color: gainsboro;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 1%;
     float: left;
   }
 
   #sidenavContent {
     margin-left: 5%;
+    float: left;
   }
   
   /* Style tab links */
@@ -45,20 +46,16 @@ body, html {
     height: 100%;
   }
 
-  /* .main {
-    margin-left: 30%;
-  } */
 
 
   #column {
     float: left;
     width: 15%;
     padding-left: 5%;
-    border: white;
   }
-  data {
-    outline: 5px white;
-    border: white;
+  #Data {
+    border: solid white;
+    float: left;
   }
 
 
