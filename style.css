@@ -1,0 +1,67 @@
+/* Set height of body and the document to 100% to enable "full page tabs" */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+  }
+
+
+  .sidenav {
+    height: 100%;
+    width: 160px;
+    /* position: fixed; */
+    z-index: 1;
+    /* top: 0;
+    left: 0; */
+    background-color: gainsboro;
+    overflow-x: hidden;
+    padding-top: 20px;
+    float: left;
+  }
+
+  #sidenavContent {
+    margin-left: 10px;
+  }
+  
+  /* Style tab links */
+  .tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 15px 15px;
+    font-size: 17px;
+    width: 15%;
+  }
+  
+  .tablink:hover {
+    background-color: #777;
+  }
+  
+  /* Style the tab content (and add height:100% for full page content) */
+  .tabcontent {
+    color: white;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+  }
+
+  
+
+  .main {
+    margin-left: 160px;
+  }
+
+
+  
+  #Battery {background-color: black;}
+  #Motor {background-color: black;}
+  #Array {background-color: black;}
+  #Error {background-color: black;}
+  #About {background-color: black;}
+  #Maps {background-color: black;}
+
+
+  

@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+</head>
+
+<body>
+
+
+    <div class="sidenav">
+            <img src="Solar_Logo.png" alt="Our Logo">
+            <h3 id="sidenavContent">Connection Status</h3>
+            <h3 id="sidenavContent">Velocity</h3>
+            <h3 id="sidenavContent">Battery Current</h3>
+            <h3 id="sidenavContent">Battery Charge</h3>
+            <h3 id="sidenavContent">Battery Voltage</h3>
+            <h3 id="sidenavContent">Battery Temperature</h3>
+    </div>
+
+    <script type="text/javascript" src="tabs.js"></script>
+    <button class="tablink" onclick="openPage('Battery', this, 'cyan')">Battery</button>
+    <button class="tablink" onclick="openPage('Array', this, 'cyan')">Array</button>
+    <button class="tablink" onclick="openPage('Motor', this, 'cyan')">Motor</button>
+    <button class="tablink" onclick="openPage('Error', this, 'cyan')">Error</button>
+    <button class="tablink" onclick="openPage('Maps', this, 'cyan')" id="defaultOpen">Maps</button>
+
+   <div class="main">
+        <div id="Maps" class="tabcontent">
+                <h3>Location</h3>
+                <h3>Wind Speed</h3>
+        </div>
+
+        <div id="Battery" class="tabcontent">
+            <h3>Flags</h3>
+            <h3>Faultcode</h3>
+            <h3>Peak Voltage</h3>
+            <h3>Current</h3>
+        </div>
+
+        <div id="Array" class="tabcontent">
+            <h3>Array</h3>
+        </div>
+
+        <div id="Error" class="tabcontent">
+            <h3>Error</h3>
+        </div>
+
+        <div id="Motor" class="tabcontent">
+            <h3>Motor Speed</h3>
+            <h3>Motor Temp</h3>
+            <h3>Motor Controller Temp</h3>
+            <h3>Bus Voltage</h3>
+            <h3>Bus Current</h3>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
