@@ -5,14 +5,11 @@ body, html {
     font-family: Arial;
   }
 
-
+/* Styling the sidebar */
   .sidenav {
     height: 100%;
     width: 160px;
-    /* position: fixed; */
     z-index: 1;
-    /* top: 0;
-    left: 0; */
     background-color: gainsboro;
     overflow-x: hidden;
     padding-top: 20px;
@@ -20,7 +17,7 @@ body, html {
   }
 
   #sidenavContent {
-    margin-left: 10px;
+    margin-left: 5%;
   }
   
   /* Style tab links */
@@ -48,20 +45,28 @@ body, html {
     height: 100%;
   }
 
-  
+  /* .main {
+    margin-left: 30%;
+  } */
 
-  .main {
-    margin-left: 160px;
+
+  #column {
+    float: left;
+    width: 15%;
+    padding-left: 5%;
+    border: white;
+  }
+  data {
+    outline: 5px white;
+    border: white;
   }
 
 
-  
+
+  /* Setting the background colour for each tab */
   #Battery {background-color: black;}
   #Motor {background-color: black;}
   #Array {background-color: black;}
   #Error {background-color: black;}
   #About {background-color: black;}
   #Maps {background-color: black;}
-
-
-  
