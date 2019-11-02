@@ -1,69 +1,91 @@
-/* Set height of body and the document to 100% to enable "full page tabs" */
+/* Body CSS */
 body, html {
     height: 100%;
     margin: 0;
     font-family: Arial;
-  }
+    background-color: black;
+}
 
-/* Styling the sidebar */
-  .sidenav {
+/* Sidebar Styling */
+.SideNav {
     height: 100%;
     width: 15%;
     z-index: 1;
     background-color: gainsboro;
     overflow-x: hidden;
-    padding-top: 1%;
+    padding-top: 5px;
     float: left;
-  }
+}
 
-  #sidenavContent {
-    margin-left: 5%;
+.SideNavContent {
+    padding-left: 5px;
+    font-size: 17px;
+    font-weight: bold;
     float: left;
-  }
-  
-  /* Style tab links */
-  .tablink {
+    clear: both;
+}
+
+#SideNavTitle {
+    padding-left: 5px;
+    padding-top: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    float: left;
+    clear: both;
+}
+
+/* Style tab links */
+.tablink {
     background-color: #555;
     color: white;
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 15px 15px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
     font-size: 17px;
-    width: 15%;
-  }
-  
-  .tablink:hover {
+    width: 17%;
+}
+
+.tablink:hover {
     background-color: #777;
-  }
-  
-  /* Style the tab content (and add height:100% for full page content) */
-  .tabcontent {
+}
+
+/* Style for contents in each tabs */
+.tabcontent {
     color: white;
     display: none;
     padding: 100px 20px;
     height: 100%;
-  }
+}
 
-
-
-  #column {
+#column {
     float: left;
-    width: 15%;
     padding-left: 5%;
-  }
-  #Data {
+}
+
+#data {
     border: solid white;
     float: left;
-  }
+    clear: both;
+}
 
-
-
-  /* Setting the background colour for each tab */
-  #Battery {background-color: black;}
-  #Motor {background-color: black;}
-  #Array {background-color: black;}
-  #Error {background-color: black;}
-  #About {background-color: black;}
-  #Maps {background-color: black;}
+/* Style for each tabs */
+#Battery {
+    background-color: black;
+}
+#Motor {
+    background-color: black;
+}
+#Array {
+    background-color: black;
+}
+#Error {
+    background-color: black;
+}
+#Maps {
+    background-color: black;
+}
