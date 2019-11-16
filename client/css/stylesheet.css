@@ -1,0 +1,91 @@
+/* Body CSS */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+    background-color: black;
+}
+
+/* Sidebar Styling */
+.SideNav {
+    height: 100%;
+    width: 15%;
+    z-index: 1;
+    background-color: gainsboro;
+    overflow-x: hidden;
+    padding-top: 5px;
+    float: left;
+}
+
+.SideNavContent {
+    padding-left: 5px;
+    font-size: 17px;
+    font-weight: bold;
+    float: left;
+    clear: both;
+}
+
+#SideNavTitle {
+    padding-left: 5px;
+    padding-top: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    float: left;
+    clear: both;
+}
+
+/* Style tab links */
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    font-size: 17px;
+    width: 17%;
+}
+
+.tablink:hover {
+    background-color: #777;
+}
+
+/* Style for contents in each tabs */
+.tabcontent {
+    color: white;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+#column {
+    float: left;
+    padding-left: 5%;
+}
+
+#data {
+    border: solid white;
+    float: left;
+    clear: both;
+}
+
+/* Style for each tabs */
+#Battery {
+    background-color: black;
+}
+#Motor {
+    background-color: black;
+}
+#Array {
+    background-color: black;
+}
+#Error {
+    background-color: black;
+}
+#Maps {
+    background-color: black;
+}
