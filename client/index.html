@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 </head>
 
@@ -14,16 +14,17 @@
 
         <div id="SideNavTitle">Telemetry Interface</div>
 
-        <div id="SideNavTitle">Connection Status</div>
+        <div id="SideNavTitle">Connection Status:</div>
+        <div id="server-connected-disconnected">Disconnected</div>
 
         <div id="SideNavTitle">Velocity</div>
         <div id="data">
-            <h5>Velocity goes here</h5>
+            <div id="speed"></div>
         </div>
 
-        <div id="SideNavTitle">Battery Current</div>
+        <div id="SideNavTitle">Battery Temperature</div>
         <div id="data">
-            <h5>Current goes here</h5>
+            <h5 id="ave-batt-temp">-</h5>
         </div>
 
         <div id="SideNavTitle">Battery Charge</div>
@@ -48,7 +49,7 @@
     </div>
 
     <!-- Tabs -->
-    <script type="text/javascript" src="./script/tabs.js"></script>
+    <script type="text/javascript" src="js/tabs.js"></script>
     <button class="tablink" onclick="openPage('Battery', this, 'cyan')" id="defaultOpen">Battery</button>
     <button class="tablink" onclick="openPage('Motor', this, 'cyan')">Motor</button>
     <button class="tablink" onclick="openPage('Array', this, 'cyan')">Array</button>
@@ -155,7 +156,8 @@
 
     </div>
 
-
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
