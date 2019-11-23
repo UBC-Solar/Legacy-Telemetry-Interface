@@ -42,8 +42,8 @@ function parseRaw(receive) {
 
         var send =
         {
-            "ID": id
-			"TimeStamp": milli
+            "ID": id,
+			"TimeStamp": milli,
 			"relayFault": relayFault,
             "K3": K3,
             "K2": K2,
@@ -57,7 +57,7 @@ function parseRaw(receive) {
             "HARDWIRErequest": HARDWIRErequest,
             "interlock": interlock,
             "powerLoad": powerLoad,
-            "powerSource": powerSource
+            "powerSource": powerSource,
 			"overVoltage": overVoltage,
             "underVoltage": underVoltage,
             "overTemperature": overTemperature,
