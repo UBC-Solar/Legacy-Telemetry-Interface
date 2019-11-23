@@ -32,3 +32,130 @@ var data =
 }
 
 ```
+### Solar Car Specifications ###
+
+#### ID: 0x622 ####
+```
+var send = 
+{
+    "ID": "0x622",
+    "TimeStamp": milli,
+    "relayFault": relayFault,
+    "K3": K3,
+    "K2": K2,
+    "K1": K1,
+    "faultState": faultState,
+    "timer": timer,
+    "fanOn": fanOn,
+    "LLIM": LLIM,
+    "HLIM": HLIM,
+    "CANrequest": CANrequest,
+    "HARDWIRErequest": HARDWIRErequest,
+    "interlock": interlock,
+    "powerLoad": powerLoad,
+    "powerSource": powerSource,
+    "overVoltage": overVoltage,
+    "underVoltage": underVoltage,
+    "overTemperature": overTemperature,
+    "dischargeOvercurrent": dischargeOvercurrent, 
+    "chargeOvercurrent": chargeOvercurrent,
+    "commFault": commFault,
+    "interlockTrip": interlockTrip,
+    "drivingOff": drivingOff,
+    "isoFault": isoFault,
+    "lowSOH": lowSOH,
+    "hotTemp": hotTemp,
+    "coldTemp": coldTemp,
+    "dischargeOC": dischargeOC,
+    "chargeOC": chargeOC,
+    "highVolt": highVolt,
+    "lowVolt": lowVolt
+}
+
+```
+#### ID: 0x623 ####
+```
+
+var send = 
+{
+    "ID": "0x623",
+    "TimeStamp": milli,
+    "packVoltage": packVoltage,
+    "minVoltage": minVoltage,
+    "maxVoltage": maxVoltage 
+}
+
+```
+#### ID: 0x624 ####
+```
+
+var send = 
+{
+    "ID": "0x624",
+    "TimeStamp": milli,
+    "current": current
+}
+
+```
+#### ID: 0x626 ####
+```
+
+var send = 
+{
+    "ID": "0x626",
+    "TimeStamp": milli,
+    "stateOfCharge": SOC
+}
+
+```
+#### ID: 0x627 ####
+```
+
+var send = 
+{
+    "ID": "0x627",
+    "TimeStamp": milli,
+    "temperature": temperature,
+    "minTemp": minTemp,
+    "maxTemp": maxTemp
+}
+
+```
+#### ID: 0x401 ####
+```
+
+var send = 
+{
+    "ID": "0x401",
+    "TimeStamp": milli,
+    "voltageLockOut": voltageLockOut,
+    "configError": configError,
+    "watchdogReset": watchdogReset,
+    "badMotor": badMotor,
+    "DCOverVoltage": DCOverVoltage,
+    "softwareOverCurrent": softwareOvercurrent,
+    "hardwareOverCurrent": hardwareOvercurrent
+}
+
+```
+#### ID: 0x402 ####
+```
+
+var send = 
+{
+    "ID": "0x402",
+    "TimeStamp": milli,
+    "busCurrent": busCurrent,
+    "busVoltage": busVoltage
+}
+
+```
+#### ID: 0x403 ####
+```
+
+var send = 
+{
+    "ID": "0x403",
+    "TimeStamp": milli,
+    "velocity": velocity
+}
