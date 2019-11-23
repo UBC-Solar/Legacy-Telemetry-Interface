@@ -69,7 +69,9 @@ body, html {
 
 #data {
     border: solid white;
-    float: left;
+    margin: auto;
+    width: 50%;
+    text-align: center;
     clear: both;
 }
 

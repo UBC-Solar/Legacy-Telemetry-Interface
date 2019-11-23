@@ -1,16 +1,16 @@
-function parseRaw(receive){
+exports.parseRaw = function(receive){
 	var id= receive["id"];
 	var message= receive["data"];
 	var milli=receive["timestamp"];
 
-	if(id == 0x622) {
+	if(id === 0x622) {
 		var relayFault=(message>>59 & 1);
 		var K3=(message>>60 & 1);
 		var K2=(message>>61 & 1);
 		var K1=(message>>62 & 1);
 		var faultState=(message>>63 & 1);
 		
-		var timer= message[1].concat(message[2]);
+		var timer= "" + message[1] + message[2];
 		
 		var fanOn=(message>>32 & 1);
 		var LLIM=(message>>33 & 1);
@@ -78,7 +78,7 @@ function parseRaw(receive){
 		return send; 
 	
 	} else if (id === 0x623) {
-		var packVoltage = receive["data"][0].concat(receive["data"][1]); // how to make sure js reads as unsigned?
+		var packVoltage = receive["data"][0] + receive["data"][1] + ""; // how to make sure js reads as unsigned?
 		packVoltage = packVoltage & 0x0FFFF;
 		var minVoltage = receive["data"][2];
 		var maxVoltage = receive["data"][4];
@@ -96,7 +96,7 @@ function parseRaw(receive){
 		return send;
 	
 	} else if (id === 0x624) {
-		var current = receive["data"][0].concat(receive["data"][1]);
+		var current = receive["data"][0] + receive["data"][1] + "";
 
 		var send = 
 		{
@@ -107,9 +107,9 @@ function parseRaw(receive){
 
 		return send;
 
-	} else if(id == 0x626) {
+	} else if(id === 0x626) {
 
-		var SOC= recieve["data"][0];
+		var SOC= receive["data"][0];
 
 		var send=
 		{	
@@ -121,10 +121,10 @@ function parseRaw(receive){
 
 		return send;
 	
-	} else if(id==0x627) {
+	} else if(id===0x627) {
 
-		var temperature= recieve["data"][0];
-		var minTemp= recieve["data"][2];
+		var temperature= receive['data'][0];
+		var minTemp= receive["data"][2];
 		var maxTemp= receive["data"][4];
 
 		var send=
@@ -139,7 +139,7 @@ function parseRaw(receive){
 
 		return send;
 
-	} else if(id==0x401) {
+	} else if(id===0x401) {
 
 		var voltageLockOut= ((receive["data"][4]>>6) & 1 );
 		var configError= ((receive["data"][4]>>5) & 1 );
@@ -151,7 +151,7 @@ function parseRaw(receive){
 
 		var send = 
 		{
-   	 	"ID": "0x401",
+   	 	"ID": 0x401,
     	"TimeStamp": milli,
     	"voltageLockOut": voltageLockOut,
     	"configError": configError,
@@ -164,42 +164,40 @@ function parseRaw(receive){
 
 		return send;
 
+	} else if(id===0x402) {
 
-	} else if(id==0x402) {
-
-		var busCurrent = receive["data"][0].concat(receive["data"][1]).concat(receive["data"][2]).concat(receive["data"][3]);//unsure about this
-		var busVoltage = receive["data"][4].concat(receive["data"][5]).concat(receive["data"][6]).concat(receive["data"][7]);
+		var busCurrent = receive["data"][0] + receive["data"][1] + receive["data"][2] + receive["data"][3] + "";//unsure about this
+		var busVoltage = receive["data"][4] + receive["data"][5] + receive["data"][6] + receive["data"][7] + "";
 
 
 		var send = 
 		{	
-    	"ID": "0x402",
+    	"ID": 0x402,
     	"TimeStamp": milli,
     	"busCurrent": busCurrent,
     	"busVoltage": busVoltage
 		}
 
-
 		return send;
 
+	} else if(id===0x403) {
 
-	} else if(id==0x403) {
-
-		var velocity= receive["data"][0].concat(receive["data"][1]).concat(receive["data"][2]).concat(receive["data"][3]);
+		var velocity= receive["data"][0] + receive["data"][1] + receive["data"][2] + receive["data"][3] + "";
 
 		var send = 
 		{
-    	"ID": "0x403",
+    	"ID": 0x403,
     	"TimeStamp": milli,
     	"velocity": velocity
 		}
 
+		return send;
 
 	} else {
 
 	var send= {
 
-		"ID": recieve["id"],
+		"ID": 0,
 		"Data Type": "unknown ID"
 	}
 
