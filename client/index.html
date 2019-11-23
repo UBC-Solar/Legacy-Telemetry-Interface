@@ -13,7 +13,9 @@
         <img src="Solar_Logo.png" alt="UBC Solar Logo">
         <div id="SideNavTitle">Telemetry Interface</div>
         <div id="SideNavTitle">Connection Status:</div>
-        <div id="ServerConnectStatus">Disconnected</div>
+        <div id='data'>
+            <div id="ServerConnectStatus">Disconnected</div>
+        </div>
 
         <div id="SideNavTitle">Velocity</div>
         <div id="data">
@@ -22,7 +24,7 @@
 
         <div id="SideNavTitle">Battery Temperature</div>
         <div id="data">
-            <h5 id="ave-batt-temp">-</h5>
+            <div id="ave-batt-temp">-</div>
         </div>
 
         <div id="SideNavTitle">Battery Charge</div>
@@ -48,11 +50,11 @@
 
     <!-- Tabs -->
     <script type="text/javascript" src="js/tabs.js"></script>
-    <button class="tablink" onclick="openPage('Battery', this, 'cyan')" id="defaultOpen">Battery</button>
-    <button class="tablink" onclick="openPage('Motor', this, 'cyan')">Motor</button>
-    <button class="tablink" onclick="openPage('Array', this, 'cyan')">Array</button>
-    <button class="tablink" onclick="openPage('Error', this, 'cyan')">Error</button>
-    <button class="tablink" onclick="openPage('Maps', this, 'cyan')">Maps</button>
+    <button class="tablink" onclick="openPage('Battery', this, '#0033cc')" id="defaultOpen">Battery</button>
+    <button class="tablink" onclick="openPage('Motor', this, '#0033cc')">Motor</button>
+    <button class="tablink" onclick="openPage('Array', this, '#0033cc')">Array</button>
+    <button class="tablink" onclick="openPage('Error', this, '#0033cc')">Error</button>
+    <button class="tablink" onclick="openPage('Maps', this, '#0033cc')">Maps</button>
 
     <!-- Creating the content for each individual tab -->
     <div class="main">
