@@ -1,0 +1,161 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+</head>
+
+<body>
+
+    <!-- Content for the sidebar -->
+    <div class="SideNav">
+        <img src="Solar_Logo.png" alt="UBC Solar Logo">
+        <div id="SideNavTitle">Telemetry Interface</div>
+        <div id="SideNavTitle">Connection Status:</div>
+        <div id="ServerConnectStatus">Disconnected</div>
+
+        <div id="SideNavTitle">Velocity</div>
+        <div id="data">
+            <div id="speed"></div>
+        </div>
+
+        <div id="SideNavTitle">Battery Temperature</div>
+        <div id="data">
+            <h5 id="ave-batt-temp">-</h5>
+        </div>
+
+        <div id="SideNavTitle">Battery Charge</div>
+        <div id="data">
+            <h5>Charge goes here</h5>
+        </div>
+
+        <div id="SideNavTitle">Battery Voltage</div>
+        <div id="data">
+            <h5>Voltage goes here</h5>
+        </div>
+
+        <div id="SideNavTitle">Battery Temperature</div>
+        <div id="data">
+            <h5>Battery Temp goes here</h5>
+        </div>
+
+        <div id="SideNavTitle">Weather</div>
+        <div id="data">
+            <h5>Weather goes here</h5>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <script type="text/javascript" src="js/tabs.js"></script>
+    <button class="tablink" onclick="openPage('Battery', this, 'cyan')" id="defaultOpen">Battery</button>
+    <button class="tablink" onclick="openPage('Motor', this, 'cyan')">Motor</button>
+    <button class="tablink" onclick="openPage('Array', this, 'cyan')">Array</button>
+    <button class="tablink" onclick="openPage('Error', this, 'cyan')">Error</button>
+    <button class="tablink" onclick="openPage('Maps', this, 'cyan')">Maps</button>
+
+    <!-- Creating the content for each individual tab -->
+    <div class="main">
+        <div id="Maps" class="tabcontent">
+            <div id="column">
+                <h3 id="Location">Location</h3>
+                <div id="data">
+                    <h4>Google Map Data</h4>
+                    <div id="googleMap" style="width:500px;height:500px"></div>
+                    <script type="text/javascript" src="./script/map.js"></script>
+                    <!-- Google Maps API: replace KEY_HERE with your API keys                    -->
+                    <!-- https://developers.google.com/maps/documentation/javascript/get-api-key -->
+                    <script src="https://maps.googleapis.com/maps/api/js?key=KEY_HERE&callback=myMap"></script>
+                </div>
+            </div>
+
+            <div id="column">
+                <h3 id="WindSpeed">Wind Speed</h3>
+                <div id="data">
+                    <h4>WindSpeed Here</h4>
+                </div>
+            </div>
+        </div>
+
+        <div id="Battery" class="tabcontent">
+            <div id="column">
+                <h3>Flags</h3>
+                <div id="data">
+                    <h4>Flag Data Here</h4>
+                </div>
+            </div>
+            <div id="column">
+                <h3>Faultcode</h3>
+                <div id="data">
+                    <h4>Faultcode Data Here</h4>
+                </div>
+            </div>
+            <div id="column">
+                <h3>Peak Voltage</h3>
+                <div id="data">
+                    <h4>Voltage Data Here</h4>
+                </div>
+            </div>
+            <div id="column">
+                <h3>Current</h3>
+                <div id="data">
+                    <h4>Current Data here</h4>
+                </div>
+            </div>
+        </div>
+
+        <div id="Array" class="tabcontent">
+            <div id="column">
+                <h3>Array</h3>
+            </div>
+        </div>
+
+        <div id="Error" class="tabcontent">
+            <div id="column">
+                <h3>Error</h3>
+                <div id="data">
+                    <h4>Error Messages here</h4>
+                </div>
+            </div>
+        </div>
+
+        <div id="Motor" class="tabcontent">
+            <div id="column">
+                <h3>Motor Speed</h3>
+                <div id="data">
+                    <h4>Speed Data here</h4>
+                </div>
+            </div>
+            <div id="column">
+                <h3>Motor Temp</h3>
+                <div id="data">
+                    <h4>Motor Temp Here</h4>
+                </div>
+            </div>
+            <div id="column">
+                <h3>Motor Controller Temp</h3>
+                <div id="data">
+                    <h4>Controller Temp Here</h4>
+                </div>
+            </div>
+            <div id="column">
+                <h3>Bus Voltage</h3>
+                <div id="data">
+                    <h4>Voltage Data Here</h4>
+                </div>
+            </div>
+            <div id="column">
+                <h3>Bus Current</h3>
+                <div id="data">
+                    <h4>Current Data Here</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
