@@ -15,6 +15,8 @@ body, html {
     overflow-x: hidden;
     padding-top: 5px;
     float: left;
+    position: relative;
+    clear: both;
 }
 
 .SideNavContent {
@@ -69,6 +71,7 @@ body, html {
 
 #data {
     border: solid white;
+    padding: 5px;
     float: left;
     clear: both;
 }

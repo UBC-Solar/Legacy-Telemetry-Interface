@@ -2,7 +2,7 @@
 window.onload = function()
 {
 
-    var serverConnStatus = document.getElementById('server-connected-disconnected');
+    var serverConnStatus = document.getElementById('ServerConnectStatus');
     var aveBattTemp = document.getElementById('ave-batt-temp');
     var aveBattTempTS = document.getElementById('ave-batt-temp-ts');
     var maxBattTemp = document.getElementById('max-batt-temp');
