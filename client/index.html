@@ -40,11 +40,11 @@
             <table class="SideNav-table">
                 <tr>
                     <td>Server Status: </td>
-                    <td>Disconnected</td>
+                    <td id="server-status">Disconnected</td>
                 </tr>
                 <tr>
                     <td>Timestamp: </td>
-                    <td>-</td>
+                    <td id="last-timestamp">-</td>
                 </tr>
                 <tr>
                     <td>Radio RSSI (dbm): </td>
@@ -64,37 +64,37 @@
             <table class="SideNav-table">
                 <tr>
                     <td>Pack Voltage</td>
-                    <td>000.0</td>
+                    <td id="batt-voltage">000.0</td>
                     <td>V</td>
                 </tr>
                 <tr>
                     <td>Min. Cell Voltage</td>
-                    <td>000.0</td>
+                    <td id="batt-min-cell-voltage">000.0</td>
                     <td>V</td>
                 </tr>
                 <tr>
                     <td>Max. Cell Voltage</td>
-                    <td>000.0</td>
+                    <td id="batt-max-cell-voltage">000.0</td>
                     <td>V</td>
                 </tr>
                 <tr>
                     <td>Pack Current</td>
-                    <td>000.0</td>
+                    <td id="batt-current">000.0</td>
                     <td>A</td>
                 </tr>  
                 <tr>
                     <td>Max. Temperature</td>
-                    <td>000.0</td>
+                    <td id="batt-max-temp">000.0</td>
                     <td>C</td>
                 </tr>
                 <tr>
                     <td>State of Charge</td>
-                    <td>000.0</td>
+                    <td id="batt-soc">000.0</td>
                     <td>%</td>
                 </tr>
                 <tr>
                     <td>Supp. Voltage</td>
-                    <td>000.0</td>
+                    <td id="batt-supp-voltage">000.0</td>
                     <td>V</td>
                 </tr>
             </table>
@@ -106,17 +106,17 @@
             <table class="SideNav-table">
                 <tr>
                     <td>Speed</td>
-                    <td>000.0</td>
+                    <td id="motor-speed">000.0</td>
                     <td>km/h</td>
                 </tr>
                 <tr>
                     <td>Temperature</td>
-                    <td>000.0</td>
+                    <td id="motor-temp">000.0</td>
                     <td>C</td>
                 </tr>
                 <tr>
                     <td>Current</td>
-                    <td>000.0</td>
+                    <td id="motor-current">000.0</td>
                     <td>A</td>
                 </tr>
             </table>
@@ -127,20 +127,20 @@
             <h3 class="SideNav-header">Battery Faults</h3>
             <table class="SideNav-table">
                 <tr>
-                    <td>Battery Low</td>
-                    <td>Battery Full</td>
-                    <td>Comm. Fault</td>
+                    <td id="battery-low">Battery Low</td>
+                    <td id="battery-full">Battery Full</td>
+                    <td id="comm-fault">Comm. Fault</td>
                 </tr>
                 <tr>
-                    <td>Charge Overcurrent</td>
-                    <td>Discharge Overcurrent</td>
-                    <td>Overtemperature</td>
+                    <td id="chg-overcurrent">Charge Overcurrent</td>
+                    <td id="dchg-overcurrent">Discharge Overcurrent</td>
+                    <td id="overtemp">Overtemperature</td>
 
                 </tr>
                 <tr>
-                    <td>Undervoltage</td>
-                    <td>Overvoltage</td>
-                    <td>General Fault</td>
+                    <td id="undervoltage">Undervoltage</td>
+                    <td id="overvoltage">Overvoltage</td>
+                    <td id="general-fault">General Fault</td>
                 </tr>
             </table>
         </div>
@@ -191,13 +191,13 @@
             <h3 class="Faults-header">BMS State</h3>
             <table class = "tab-table">
                 <tr>
-                    <td>Relay Fault</td>
-                    <td>K3 Contactor On</td>
-                    <td>K2 Contactor On</td>
+                    <td id="relay-fault">Relay Fault</td>
+                    <td id="k3-contactor">K3 Contactor On</td>
+                    <td id="k2-contactor">K2 Contactor On</td>
                 </tr>
                 <tr>
-                    <td>K1 Contactor On</td>
-                    <td>Fault State</td>
+                    <td id="k1-contactor">K1 Contactor On</td>
+                    <td id="fault-state">Fault State</td>
                     <td> - </td>
                 </tr>
             </table>
@@ -208,18 +208,18 @@
             <h3 class="Faults-header">Battery Faults</h3>
             <table class="tab-table">
                 <tr>
-                    <td>Fan On</td>
-                    <td>LLIM Set</td>
-                    <td>HLIM Set</td>
+                    <td id="fan-on">Fan On</td>
+                    <td id="llim-set">LLIM Set</td>
+                    <td id="hlim-set">HLIM Set</td>
                 </tr>
                 <tr>
-                    <td>CAN Contactor Request</td>
-                    <td>Hardwire Contactor Request</td>
-                    <td>Interlock Tripped</td>
+                    <td id="can-contactor">CAN Contactor Request</td>
+                    <td id="hardwire-contactor">Hardwire Contactor Request</td>
+                    <td id="interlock-tripped">Interlock Tripped</td>
                 </tr>
                 <tr>
-                    <td>Power from Load</td>
-                    <td>Power from Source</td>
+                    <td id="load-power">Power from Load</td>
+                    <td id="source-power">Power from Source</td>
                     <td> - </td>
                 </tr>
             </table>
@@ -230,19 +230,14 @@
             <h3 class="Faults-header">Battery Warning</h3>
             <table class="tab-table">
                 <tr>
-                    <td>Isolation Fault</td>
-                    <td>Low SOH</td>
-                    <td>Hot Temperature</td>
+                    <td id="isolation-fault">Isolation Fault</td>
+                    <td id="low-soh">Low SOH</td>
+                    <td id="hot-temp">Hot Temperature</td>
                 </tr>
                 <tr>
-                    <td>Cold Temperature</td>
-                    <td>Charge Overcurrent</td>
-                    <td>High Voltage</td>
-                </tr>
-                <tr>
-                    <td>Low Voltage</td>
-                    <td> - </td>
-                    <td> - </td>
+                    <td id="cold-temp">Cold Temperature</td>
+                    <td id="high-voltage">High Voltage</td>
+                    <td id="low-voltage">Low Voltage</td>
                 </tr>
             </table>
         </div>
@@ -252,14 +247,14 @@
             <h3 class="Faults-header">Motor Warning</h3>
             <table class="tab-table">
                 <tr>
-                    <td>Voltage Lock-out</td>
-                    <td>Configuration Error</td>
-                    <td>Watchdog Reset</td>
+                    <td id="voltage-lockout">Voltage Lock-out</td>
+                    <td id="config-error">Configuration Error</td>
+                    <td id="watchdog-reset">Watchdog Reset</td>
                 </tr>
                 <tr>
-                    <td>DC Over-voltage</td>
-                    <td>Software Over-current</td>
-                    <td>Hardware Over-current</td>
+                    <td id="dc-overvoltage">DC Over-voltage</td>
+                    <td id="software-overcurrent">Software Over-current</td>
+                    <td id="hardware-overcurrent">Hardware Over-current</td>
                 </tr>
             </table>
         </div>

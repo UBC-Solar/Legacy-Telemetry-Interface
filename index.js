@@ -30,60 +30,50 @@ io.on(
 //      parses it to its components and sends those as a JSON file.
 setInterval(
     function(){
+
+
+        //TODO: receive raw data and parse
+        /*
         var rawData = generateRawData();
         var data = parseData(rawData);
-        io.emit('battery-temp-msg', data);
+        */
+
+        if (data['id'] === 0x622)
+        {
+            io.emit('battery-faults', data);
+        }
+        else if (data['id'] === 0x623)
+        {
+            io.emit('battery-voltage', data);
+        }
+        else if (data['id'] === 0x624)
+        {
+            io.emit('battery-current', data);
+        }
+        else if (data['id'] === 0x626)
+        {
+            io.emit('battery-soc', data);
+        }
+        else if (data['id'] === 0x627)
+        {
+            io.emit('battery-temperature', data)
+        }
+        else if (data['id'] === 0x401)
+        {
+            io.emit('motor-faults', data)
+        }
+        else if (data['id'] === 0x402)
+        {
+            io.emit('motor-power', data);
+        }
+        else if (data['id'] === 0x403)
+        {
+            io.emit('motor-speed', data);
+        }
+
     },
     1000
 )
-
-function parseData(rawData)
-{
-    var data = {};
-
-    if (rawData['id'] === 0x627)
-    {
-        var aveTemp = rawData['data'][0];
-        var maxTemp = rawData['data'][4];
-        var minTemp = rawData['data'][2];
-        var timestamp = rawData['timestamp'];
-    
-        var data = 
-        {
-            "msg-id": 0x627,
-            "msg-source": "bms",
-            "timestamp": timestamp,
-            "data": 
-                {
-                    "ave-batt-temp": aveTemp,
-                    "max-batt-temp": maxTemp,
-                    "min-batt-temp": minTemp,
-                }
-        }
-        return data;
-    }
-
-}
-
-function generateRawData()
-{
-    var aveTemp = Math.floor(Math.random() * 100);
-    var maxTemp = Math.floor(Math.random() * 100);
-    var minTemp = Math.floor(Math.random() * 100);
-
-    var rawData = 
-    {
-        "id": 0x627,
-        "data": [ (aveTemp & 0xFF), 0x00, (minTemp & 0xFF), 0x03, (maxTemp & 0xFF), 0x05, 0x06, 0x07],
-        "len": 8,
-        "timestamp": new Date().getTime() 
-    }
-
-    console.log("raw data generated");
-
-    return rawData;
-
-}
 
 
 
