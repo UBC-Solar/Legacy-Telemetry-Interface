@@ -1,102 +1,260 @@
-/* Body CSS */
+/* Body*/
 
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial;
-    background-color: black;
+td {
+    padding: 1%;
+    font-size: 20px;
 }
 
-/* Sidebar Styling */
+/* Titlebar*/
 
-.SideNav {
-    height: 100%;
-    width: 15%;
-    z-index: 1;
-    background-color: gainsboro;
-    overflow-x: hidden;
-    padding-top: 5px;
-    float: left;
-    position: relative;
-    clear: both;
+#Titlebar {
+    background-color: lightblue;
+    position: fixed;
+    height: 10%;
+    width: 35%;
 }
 
-.SideNavContent {
-    padding-left: 5px;
-    font-size: 17px;
-    font-weight: bold;
-    float: left;
-    clear: both;
+#Titlebar-Emblem-SolarLogo {
+    position: absolute;
+    height: 70%;
+    top: 15%;
 }
 
-#SideNavTitle {
-    padding-left: 5px;
-    padding-top: 10px;
-    font-size: 17px;
-    font-weight: bold;
-    float: left;
-    clear: both;
+#Titlebar-table {
+    position: absolute;
+    left: 30%;
+    width: 70%;
+}
+
+/* Sidebar*/
+
+#SideNav {
+    background-color: lightblue;
+    position: fixed;
+    height: 85%;
+    width: 35%;
+    top: 12.5%;
+}
+
+#SideNav-Emblem {
+    position: absolute;
+    top: 5%;
+    left: 2.5%;
+    width: 45%;
+    height: 10%;
+
+    border: 3px solid green;
+    border-radius: 20px;
+}
+
+#SideNav-Communications {
+    position: absolute;
+    top: 30%;
+    right: 2.5%;
+    width: 45%;
+
+    border: 3px solid green;
+    border-radius: 20px;
+}
+
+#SideNav-BatterySummary {
+    position: absolute;
+    top: 27.5%;
+    left: 2.5%;
+    width: 45%;
+
+    border: 3px solid green;
+    border-radius: 20px;
+}
+
+#SideNav-MotorSummary {
+    position: absolute;
+    top: 5%;
+    right: 2.5%;
+    width: 45%;
+    
+    border: 3px solid green;
+    border-radius: 20px;
+}
+
+#SideNav-BatteryFaults {
+    position: absolute;
+    top: 70%;
+    right: 2.5%;
+    width: 95%;
+
+    border: 3px solid green;
+    border-radius: 20px;
+}
+
+/* SideNav lower elements */
+
+#SideNav-Emblem-Solarlogo {
+    width: 98%;
+    height: 42%;
+    padding: 2%;
+}
+
+.SideNav-header {
+    font-size: 20px;
+    text-align: center;
+}
+
+.SideNav-mainheader {
+    font-size: 30px;
+    text-align: center;
+}
+
+.SideNav-table {
+    font-size: 20px;
+
+    width: 100%;
+    padding: 2%;
+    
+}
+
+/* graph tab */
+
+#GraphNav {
+    position: fixed;
+    left: 36%;
+    height: 96.75%;
+    width: 30%;
+    background-color: lightblue;
+}
+
+#GraphNav-Title {
+    position: absolute;
+    width: 95%;
+    height: 10%;
+    left: 2.5%;
+
+    text-align: center;
+
+    border: 3px solid green;
+    border-radius: 20px;
+}
+
+#GraphNav-Temp {
+    position: absolute;
+    width: 95%;
+    height: 20%;
+    top: 25%;
+    left: 2.5%;
+
+    text-align: center;
+}
+
+#GraphNav-Speed {
+    position: absolute;
+    width: 95%;
+    height: 20%;
+    top: 50%;
+    left: 2.5%;
+
+    text-align: center;
+}
+
+#GraphNav-Current {
+    position: absolute;
+    width: 95%;
+    height: 20%;
+    top: 75%;
+    left: 2.5%;
+
+    text-align: center;
 }
 
 /* Style tab links */
 
+#tab-bar {
+    background-color: lightblue;
+    position: fixed;
+    width: 33%;
+    left: 66.5%;
+    height: 10%;
+}
+
 .tablink {
-    background-color: #555;
-    color: white;
-    float: left;
+    background-color: lightblue;
+    text-align: center;
     border: none;
     outline: none;
-    cursor: pointer;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    font-size: 17px;
-    width: 17%;
-}
-
-.tablink:hover {
-    background-color: #777;
-}
-
-/* Style for contents in each tabs */
-
-.tabcontent {
-    color: white;
-    display: none;
-    padding: 100px 20px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-size: 20px;
+    width: 32.5%;
     height: 100%;
 }
 
-#column {
-    float: left;
-    padding-left: 5%;
+.tablink:hover {
+    background-color: lightsteelblue;
 }
 
-#data {
-    border: solid white;
-    padding: 5px;
-    clear: both;
+.tabcontent {
+    background-color: lightblue;
+    position: fixed;
+    display: none;
+    height: 85%;
+    width: 33%;
+    left: 66.5%;
+    top: 12.5%;
 }
 
-/* Style for each tabs */
-
-#Battery {
-    background-color: black;
+#Faults {
+    display: inline;
 }
 
-#Motor {
-    background-color: black;
+#Faults-bmsState {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+    width: 95%;
+
+    border: 3px solid green;
+    border-radius: 20px;
 }
 
-#Array {
-    background-color: black;
+#Faults-batteryFault {
+    position: absolute;
+    top: 23%;
+    left: 2.5%;
+    width: 95%;
+
+    border: 3px solid green;
+    border-radius: 20px;
 }
 
-#Error {
-    background-color: black;
+#Faults-batteryWarning {
+    position: absolute;
+    top: 51.5%;
+    left: 2.5%;
+    width: 95%;
+
+    border: 3px solid green;
+    border-radius: 20px;
 }
 
-#Maps {
-    background-color: black;
+#Faults-motorWarning {
+    position: absolute;
+    top: 76.5%;
+    left: 2.5%;
+    width: 95%;
+
+    border: 3px solid green;
+    border-radius: 20px;
 }
+
+.Faults-header {
+    text-align: center;
+}
+
+.tab-table {
+    font-size: 20px;
+
+    width: 100%;
+    padding: 1%;
+}
+
+
+
