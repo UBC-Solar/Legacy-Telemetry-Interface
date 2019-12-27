@@ -1,5 +1,11 @@
 /* Body*/
 
+body {
+    background-color: darkblue;
+    color: lightcyan;
+    font-family: Calibri;
+}
+
 td {
     padding: 1%;
     font-size: 20px;
@@ -8,7 +14,7 @@ td {
 /* Titlebar*/
 
 #Titlebar {
-    background-color: lightblue;
+    background-color: darkslategray;
     position: fixed;
     height: 10%;
     width: 35%;
@@ -26,10 +32,15 @@ td {
     width: 70%;
 }
 
+#Titlebar-link {
+    color: lightcyan;
+    
+}
+
 /* Sidebar*/
 
 #SideNav {
-    background-color: lightblue;
+    background-color: darkslategray;
     position: fixed;
     height: 85%;
     width: 35%;
@@ -43,7 +54,7 @@ td {
     width: 45%;
     height: 10%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -53,7 +64,7 @@ td {
     right: 2.5%;
     width: 45%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -63,7 +74,7 @@ td {
     left: 2.5%;
     width: 45%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -73,7 +84,7 @@ td {
     right: 2.5%;
     width: 45%;
     
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -83,7 +94,7 @@ td {
     right: 2.5%;
     width: 95%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -120,7 +131,7 @@ td {
     left: 36%;
     height: 96.75%;
     width: 30%;
-    background-color: lightblue;
+    background-color: darkslategray;
 }
 
 #GraphNav-Title {
@@ -131,7 +142,7 @@ td {
 
     text-align: center;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -168,7 +179,7 @@ td {
 /* Style tab links */
 
 #tab-bar {
-    background-color: lightblue;
+    background-color: darkslategrey;
     position: fixed;
     width: 33%;
     left: 66.5%;
@@ -176,7 +187,7 @@ td {
 }
 
 .tablink {
-    background-color: lightblue;
+    background-color: darkslategray;
     text-align: center;
     border: none;
     outline: none;
@@ -192,7 +203,7 @@ td {
 }
 
 .tabcontent {
-    background-color: lightblue;
+    background-color: darkslategray;
     position: fixed;
     display: none;
     height: 85%;
@@ -211,7 +222,7 @@ td {
     left: 2.5%;
     width: 95%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -221,7 +232,7 @@ td {
     left: 2.5%;
     width: 95%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -231,7 +242,7 @@ td {
     left: 2.5%;
     width: 95%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -241,7 +252,7 @@ td {
     left: 2.5%;
     width: 95%;
 
-    border: 3px solid green;
+    border: 3px solid lightsteelblue;
     border-radius: 20px;
 }
 
@@ -254,6 +265,10 @@ td {
 
     width: 100%;
     padding: 1%;
+}
+
+.tablink {
+    color: lightcyan;
 }
 
 
