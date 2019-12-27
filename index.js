@@ -4,13 +4,15 @@ var path = require('path');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
+var parser = require('./CAN_Parser/CANparse');
+
 var port = process.env.PORT || 3000;
 
 server.listen(
     port, 
     function() 
     {
-        console.log('Server listening at port %d', port);
+        console.log('server listening at port %d', port);
     }
 );
 
@@ -20,8 +22,8 @@ io.on(
     'connection',
     function(socket)
     {
-        console.log("Initial Message Sent");
         io.emit('introduction');
+        console.log("socket connection initialized");
     }
 )
 
@@ -31,12 +33,10 @@ io.on(
 setInterval(
     function(){
 
+        //TODO:replace this
+        var rawData;
 
-        //TODO: receive raw data and parse
-        /*
-        var rawData = generateRawData();
-        var data = parseData(rawData);
-        */
+        var data = parser.parseRaw(rawData);
 
         if (data['id'] === 0x622)
         {

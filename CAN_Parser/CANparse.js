@@ -3,6 +3,7 @@ function parseRaw(receive) {
     var message = receive["data"];
     var milli = receive["timestamp"];
 
+    //Msg 0x622, Battery Faults + Warnings
     if (id == 0x622) {
 
         //Msg 0x622, Byte 0: State of System
@@ -83,8 +84,9 @@ function parseRaw(receive) {
 
         return send;
 
-    } else if (id == 0x623) {
 
+    } else if (id == 0x623) {
+        //Msg 0x623, Battery Voltages
         var packVoltage = (receive["data"][0] << 8) | receive["data"][1];
         var minVoltage = receive["data"][2];
         var maxVoltage = receive["data"][4];
@@ -100,8 +102,9 @@ function parseRaw(receive) {
 
         return send;
 
-    } else if (id == 0x624) {
 
+    } else if (id == 0x624) {
+        //Msg 0x624, Battery current
         var current = (receive["data"][0] << 8) | receive["data"][1];
 
         var send =
@@ -112,9 +115,10 @@ function parseRaw(receive) {
         }
 
         return send;
-
+    
+    //
     } else if (id == 0x626) {
-
+        //Msg 0x626, Battery state of charge
         var SOC = receive["data"][0];
 
         var send =
@@ -127,7 +131,7 @@ function parseRaw(receive) {
         return send;
 
     } else if (id == 0x627) {
-
+        //Msg 0x627, Battery temperature
         var temperature = receive["data"][0];
         var minTemp = receive["data"][2];
         var maxTemp = receive["data"][4];
@@ -145,7 +149,7 @@ function parseRaw(receive) {
         return send;
 
     } else if (id == 0x401) {
-
+        //Msg 0x401, Motor Faults + Warnings
         var voltageLockOut = ((receive["data"][4] >> 6) & 1);
         var configError = ((receive["data"][4] >> 5) & 1);
         var watchdogReset = ((receive["data"][4] >> 4) & 1);
@@ -168,9 +172,9 @@ function parseRaw(receive) {
         }
 
         return send;
-
-    } else if (id == 0x402) {
         
+    } else if (id == 0x402) {
+        //Msg 0x402, Motor current and voltage
         var busCurrent = ieee32ToFloat((receive["data"][0] << 24) | (receive["data"][1] << 16) | (receive["data"][2] << 8) | (receive["data"][3]));
         var busVoltage = ieee32ToFloat((receive["data"][4] << 24) | (receive["data"][5] << 16) | (receive["data"][6] << 8) | (receive["data"][7]));
 
@@ -185,7 +189,7 @@ function parseRaw(receive) {
         return send;
 
     } else if (id == 0x403) {
-
+        //Msg 0x403, Motor velocity
         var velocity = ieee32ToFloat((receive["data"][0] << 24) | (receive["data"][1] << 16) | (receive["data"][2] << 8) | (receive["data"][3]));
 
         var send =
@@ -220,7 +224,6 @@ function ieee32ToFloat(intval) {
     m = (intval & 0x7FFFFF);
     switch(x) {
         case 0:
-            //zero, do nothing, ignore negative zero and subnormals
             break;
         case 0xFF:
             if (m) fval = NaN;

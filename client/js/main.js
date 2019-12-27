@@ -400,6 +400,15 @@ window.onload = function () {
                 watchdogReset.style.color = "green";
             }
 
+            if (data['DCOverVoltage'] === true)
+            {
+                dcOV.style.color = "red";
+            }
+            else
+            {
+                dcOV.style.color = "green";
+            }
+
             if (data['softwareOverCurrent'] === true)
             {
                 softwareOC.style.color = "red";
