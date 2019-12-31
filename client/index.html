@@ -17,9 +17,6 @@
             <tr>
                 <td><h2 class="Titlebar-mainheader">Telemetry Interface for Daybreak</h2></td>
             </tr>
-            <tr>
-                <td><a href="https://github.com/Telemetry-Interface" id="Titlebar-link">Github: Telemetry-Interface</a></td>
-            </tr>
         </table>
     </div>
 
@@ -48,7 +45,7 @@
                 </tr>
                 <tr>
                     <td>Message ID: </td>
-                    <td>-</td>
+                    <td id="last-id">-</td>
                 </tr>
                 <tr>
                     <td>Radio RSSI (dbm): </td>
@@ -92,6 +89,16 @@
                     <td>C</td>
                 </tr>
                 <tr>
+                    <td>Min. Temperature</td>
+                    <td id="batt-min-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>Ave. Temperature</td>
+                    <td id="batt-ave-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+                <tr>
                     <td>State of Charge</td>
                     <td id="batt-soc">000.0</td>
                     <td>%</td>
@@ -110,7 +117,7 @@
             <table class="SideNav-table">
                 <tr>
                     <td>Speed</td>
-                    <td id="motor-speed">000.0</td>
+                    <td id="motor-velocity">000.0</td>
                     <td>km/h</td>
                 </tr>
                 <tr>
@@ -118,6 +125,22 @@
                     <td id="motor-current">000.0</td>
                     <td>A</td>
                 </tr>
+                <tr>
+                    <td>Voltage</td>
+                    <td id="motor-voltage">000.0</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>Temperature</td>
+                    <td id="motor-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>Heatsink</td>
+                    <td id="mc-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+
             </table>
         </div>
 
@@ -287,6 +310,8 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
+
+    <script src="js/tabs.js"></script>
 </body>
 
 </html>

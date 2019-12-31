@@ -1,4 +1,4 @@
-function parseRaw(receive) {
+exports.canParser = function parseRaw(receive) {
     var id = receive["id"];
     var message = receive["data"];
     var milli = receive["timestamp"];
@@ -7,24 +7,24 @@ function parseRaw(receive) {
     if (id == 0x622) {
 
         //Msg 0x622, Byte 0: State of System
-        var relayFault = (message >> 59 & 1);
-        var K3 = (message >> 60 & 1);
-        var K2 = (message >> 61 & 1);
-        var K1 = (message >> 62 & 1);
-        var faultState = (message >> 63 & 1);
+        var relayFault = (message[0] >> 4 & 1);
+        var K3 = (message[0] >> 3 & 1);
+        var K2 = (message[0] >> 2 & 1);
+        var K1 = (message[0] >> 1 & 1);
+        var faultState = (message[0] & 1);
 
         //Msg 0x522, Byte 1, Byte 2: Timer
-        var timer = message[1].concat(message[2]);
+        var timer = 0;
 
         //Msg 0x622, Byte 4: Fault Codes
-        var fanOn = (message >> 32 & 1);
-        var LLIM = (message >> 33 & 1);
-        var HLIM = (message >> 34 & 1);
-        var CANrequest = (message >> 35 & 1);
-        var HARDWIRErequest = (message >> 36 & 1);
-        var interlock = (message >> 37 & 1);
-        var powerLoad = (message >> 38 & 1);
-        var powerSource = (message >> 39 & 1);
+        var fanOn = (message[3] >> 7 & 1);
+        var LLIM = (message[3] >> 6 & 1);
+        var HLIM = (message[3] >> 5 & 1);
+        var CANrequest = (message[3] >> 4 & 1);
+        var HARDWIRErequest = (message[3] >> 3 & 1);
+        var interlock = (message[3] >> 2 & 1);
+        var powerLoad = (message[3] >> 1 & 1);
+        var powerSource = (message[3] & 1);
 
         //Msg 0x622, Byte 5: Level Faults
         var overVoltage = (message[5] >> 7 & 1);
@@ -88,8 +88,8 @@ function parseRaw(receive) {
     } else if (id == 0x623) {
         //Msg 0x623, Battery Voltages
         var packVoltage = (receive["data"][0] << 8) | receive["data"][1];
-        var minVoltage = receive["data"][2];
-        var maxVoltage = receive["data"][4];
+        var minVoltage = receive["data"][2]  / 10;
+        var maxVoltage = receive["data"][4] / 10;
 
         var send =
         {
@@ -105,7 +105,7 @@ function parseRaw(receive) {
 
     } else if (id == 0x624) {
         //Msg 0x624, Battery current
-        var current = (receive["data"][0] << 8) | receive["data"][1];
+        var current = twosComplement16((receive["data"][0] << 8) | receive["data"][1]);
 
         var send =
         {
@@ -119,7 +119,7 @@ function parseRaw(receive) {
     //
     } else if (id == 0x626) {
         //Msg 0x626, Battery state of charge
-        var SOC = receive["data"][0];
+        var SOC = twosComplement8(receive["data"][0]);
 
         var send =
         {
@@ -132,9 +132,9 @@ function parseRaw(receive) {
 
     } else if (id == 0x627) {
         //Msg 0x627, Battery temperature
-        var temperature = receive["data"][0];
-        var minTemp = receive["data"][2];
-        var maxTemp = receive["data"][4];
+        var temperature = twosComplement8(receive["data"][0]);
+        var minTemp = twosComplement8(receive["data"][2]);
+        var maxTemp = twosComplement8(receive["data"][4]);
 
         var send =
         {
@@ -150,17 +150,17 @@ function parseRaw(receive) {
 
     } else if (id == 0x401) {
         //Msg 0x401, Motor Faults + Warnings
-        var voltageLockOut = ((receive["data"][4] >> 6) & 1);
-        var configError = ((receive["data"][4] >> 5) & 1);
-        var watchdogReset = ((receive["data"][4] >> 4) & 1);
-        var badMotor = ((receive["data"][4] >> 3) & 1);
-        var DCOverVoltage = ((receive["data"][4] >> 2) & 1);
-        var softwareOverCurrent = ((receive["data"][4] >> 1) & 1);
-        var hardwareOverCurrent = ((receive["data"][4] >> 0) & 1);
+        var voltageLockOut = ((receive["data"][5] >> 6) & 1);
+        var configError = ((receive["data"][5] >> 5) & 1);
+        var watchdogReset = ((receive["data"][5] >> 4) & 1);
+        var badMotor = ((receive["data"][5] >> 3) & 1);
+        var DCOverVoltage = ((receive["data"][5] >> 2) & 1);
+        var softwareOverCurrent = ((receive["data"][5] >> 1) & 1);
+        var hardwareOverCurrent = ((receive["data"][5] >> 0) & 1);
 
         var send =
         {
-            "ID": "0x401",
+            "ID": 0x401,
             "timeStamp": milli,
             "voltageLockOut": voltageLockOut,
             "configError": configError,
@@ -180,7 +180,7 @@ function parseRaw(receive) {
 
         var send =
         {
-            "ID": "0x402",
+            "ID": 0x402,
             "timeStamp": milli,
             "busCurrent": busCurrent,
             "busVoltage": busVoltage
@@ -194,14 +194,31 @@ function parseRaw(receive) {
 
         var send =
         {
-            "ID": "0x403",
+            "ID": 0x403,
             "timeStamp": milli,
-            "velocity": velocity
+            "velocity": velocity,
         }
 
         return send;
 
-    } else {
+    } else if (id == 0x40B) {
+
+        var motorTemp = ieee32ToFloat((receive["data"][0] << 24) | (receive["data"][1] << 16) | (receive["data"][2] << 8) | (receive["data"][3]));
+        var mcTemp = ieee32ToFloat((receive["data"][4] << 24) | (receive["data"][5] << 16) | (receive["data"][6] << 8) | (receive["data"][7]));
+
+        var send =
+        {
+            "ID": 0x40B,
+            "timeStamp": milli,
+            "motorTemp": motorTemp,
+            "motorControllerTemp": mcTemp
+        }
+
+        return send;
+
+    }
+    
+    else {
 
         var send = {
 
@@ -212,6 +229,32 @@ function parseRaw(receive) {
 
         return send;
     }
+}
+
+function twosComplement16(intVal) {
+
+    var sign = (intVal >> 15) & 1;
+
+    if (sign === 1)
+    {
+        intVal = -32768 + (intVal & 0x7FFF);
+    }
+
+    return intVal;
+
+}
+
+function twosComplement8(intVal){
+
+    var sign = (intVal >> 7) & 1;
+
+    if (sign === 1)
+    {
+        intVal = -128 + (intVal & 0x7F);
+    }
+
+    return intVal;
+
 }
 
 function ieee32ToFloat(intval) {

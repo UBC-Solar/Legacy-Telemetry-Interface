@@ -1,5 +1,5 @@
-# proto-telemetry-interface
-Personal prototyping platform for developing the Telemetry Interface for UBC Solar
+# Telemetry-Interface
+Data visualization interface for UBC Solar's Daybreak vehicle
 
 To set up this project locally,
 

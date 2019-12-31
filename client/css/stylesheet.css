@@ -26,7 +26,7 @@ td {
     position: absolute;
     height: 95%;
     top: 2.5%;
-    left: 5%;
+    left: 10%;
 }
 
 #Titlebar-table {
@@ -37,7 +37,6 @@ td {
 
 #Titlebar-link {
     color: lightcyan;
-    
 }
 
 /* Sidebar*/
@@ -65,7 +64,7 @@ td {
 
 #SideNav-Communications {
     position: absolute;
-    top: 30%;
+    top: 36%;
     right: 2.5%;
     width: 45%;
 
@@ -75,7 +74,7 @@ td {
 
 #SideNav-BatterySummary {
     position: absolute;
-    top: 27.5%;
+    top: 20.5%;
     left: 2.5%;
     width: 45%;
 

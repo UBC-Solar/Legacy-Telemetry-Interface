@@ -3,17 +3,22 @@ window.onload = function () {
 
     var serverStatus = document.getElementById('server-status');
     var lastTimestamp = document.getElementById('last-timestamp');
+    var lastID = document.getElementById('last-id');
 
     var battVoltage = document.getElementById('batt-voltage');
     var battMinCellVoltage = document.getElementById('batt-min-cell-voltage');
     var battMaxCellVoltage = document.getElementById('batt-max-cell-voltage');
     var battCurrent = document.getElementById('batt-current');
     var battMaxTemp = document.getElementById('batt-max-temp');
-    var battSOC = document.getElementById('batt-supp-voltage');
+    var battMinTemp = document.getElementById('batt-min-temp');
+    var battAveTemp = document.getElementById('batt-ave-temp');
+    var battSOC = document.getElementById('batt-soc');
 
-    var motorSpeed = document.getElementById('motor-speed');
+    var motorVelocity = document.getElementById('motor-velocity');
     var motorTemp = document.getElementById('motor-temp');
+    var mcTemp = document.getElementById('mc-temp');
     var motorCurrent = document.getElementById('motor-current');
+    var motorVoltage = document.getElementById('motor-voltage');
 
     var batteryLow = document.getElementById('battery-low');
     var batteryFull = document.getElementById('battery-full');
@@ -33,7 +38,7 @@ window.onload = function () {
     var k1Contactor = document.getElementById('k1-contactor');
     var faultState = document.getElementById('fault-state');
 
-    var fanOn = docment.getElementById('fan-on');
+    var fanOn = document.getElementById('fan-on');
     var llimSet = document.getElementById('llim-set');
     var hlimSet = document.getElementById('hlim-set');
     var canContactor = document.getElementById('can-contactor');
@@ -61,10 +66,8 @@ window.onload = function () {
     socket.on(
         'introduction',
         function (data) {
-
-            serverStatus .innerHTML = "Connected";
-            serverStatus.style.color = "green"
-
+            serverStatus.innerHTML = "Connected";
+            serverStatus.style.color = "green";
         }
     )
 
@@ -73,7 +76,10 @@ window.onload = function () {
         function (data) {
 
             lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battMaxTemp.innerHTML = data['maxTemp'];
+            battMinTemp.innerHTML = data['minTemp'];
+            battAveTemp.innerHTML = data['temperature'];
         }
 
     )
@@ -81,11 +87,11 @@ window.onload = function () {
     socket.on(
         'battery-faults',
         function (data) {
-            //0x622
 
             lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             
-            if (data['relayFault'] === true)
+            if (data['relayFault'] === 1)
             {
                 relayFault.style.color = "red";
             }
@@ -94,7 +100,7 @@ window.onload = function () {
                 relayFault.style.color = "green";
             }
 
-            if (data['K3'] === true)
+            if (data['K3'] === 1)
             {
                 k3Contactor.style.color = "red";
             }
@@ -103,7 +109,7 @@ window.onload = function () {
                 k3Contactor.style.color = "green";
             }
 
-            if (data['K2'] === true)
+            if (data['K2'] === 1)
             {
                 k2Contactor.style.color = "red";
             }
@@ -112,7 +118,7 @@ window.onload = function () {
                 k2Contactor.style.color = "green";
             }
 
-            if (data['K1'] === true)
+            if (data['K1'] === 1)
             {
                 k1Contactor.style.color = "red";
             }
@@ -121,7 +127,7 @@ window.onload = function () {
                 k1Contactor.style.color = "green";
             }
 
-            if (data['faultState'] === true)
+            if (data['faultState'] === 1)
             {
                 faultState.style.color = "red";
                 generalFault.style.color = "red";
@@ -132,7 +138,7 @@ window.onload = function () {
                 generalFault.style.color = "green";
             }
 
-            if (data['fanOn'] === true)
+            if (data['fanOn'] === 1)
             {
                 fanOn.style.color = "red";
             }
@@ -141,16 +147,25 @@ window.onload = function () {
                 fanOn.style.color = "green";
             }
 
-            if (data['LLIM'] === true)
+            if (data['LLIM'] === 1)
             {
                 llimSet.style.color = "red";
+            }
+            else
+            {
+                llimSet.style.color = "green";
+            }
+
+            if (data['HLIM'] === 1)
+            {
+                hlimSet.style.color = "red";
             }
             else
             {
                 hlimSet.style.color = "green";
             }
 
-            if (data['CANrequest'] === true)
+            if (data['CANrequest'] === 1)
             {
                 canContactor.style.color = "red";
             }
@@ -159,7 +174,7 @@ window.onload = function () {
                 canContactor.style.color = "green";
             }
 
-            if (data['HARDWIRErequest'] === true)
+            if (data['HARDWIRErequest'] === 1)
             {
                 hardwireContactor.style.color = "red";
             }
@@ -168,7 +183,7 @@ window.onload = function () {
                 hardwireContactor.style.color = "green";
             }
 
-            if (data['interlock'] === true)
+            if (data['interlock'] === 1)
             {
                 interlockTripped.style.color = "red";
             }
@@ -177,7 +192,7 @@ window.onload = function () {
                 interlockTripped.style.color = "green";
             }
 
-            if (data['powerLoad'] === true)
+            if (data['powerLoad'] === 1)
             {
                 loadPower.style.color = "red";
             }
@@ -186,7 +201,7 @@ window.onload = function () {
                 loadPower.style.color = "green";
             }
 
-            if (data['powerSource'] === true)
+            if (data['powerSource'] === 1)
             {
                 sourcePower.style.color = "red";
             }
@@ -195,7 +210,7 @@ window.onload = function () {
                 sourcePower.style.color = "green";
             }
 
-            if (data['overVoltage'] === true)
+            if (data['overVoltage'] === 1)
             {
                 overvoltage.style.color = "red";
             }
@@ -204,7 +219,7 @@ window.onload = function () {
                 overvoltage.style.color = "green";
             }
 
-            if (data['underVoltage'] === true)
+            if (data['underVoltage'] === 1)
             {
                 undervoltage.style.color = "red";
             }
@@ -213,7 +228,7 @@ window.onload = function () {
                 undervoltage.style.color = "green";
             }
 
-            if (data['overTemperature'] === true)
+            if (data['overTemperature'] === 1)
             {
                 overTemp.style.color = "red";
             }
@@ -222,7 +237,7 @@ window.onload = function () {
                 overTemp.style.color = "green";
             }
 
-            if (data['chargeOvercurrent'] === true)
+            if (data['chargeOvercurrent'] === 1)
             {
                 chargeOC.style.color = "red";
             }
@@ -231,7 +246,7 @@ window.onload = function () {
                 chargeOC.style.color = "green";
             }
 
-            if (data['dischargeOverCurrent'] === true)
+            if (data['dischargeOverCurrent'] === 1)
             {
                 dischargeOC.style.color = "red";
             }
@@ -240,7 +255,7 @@ window.onload = function () {
                 dischargeOC.style.color = "green";
             }
 
-            if (data['commFault'] === true)
+            if (data['commFault'] === 1)
             {
                 batteryCommFault.style.color = "red";
             }
@@ -249,7 +264,7 @@ window.onload = function () {
                 batteryCommFault.style.color = "green";
             }
 
-            if (data['interlockTrip'] === true)
+            if (data['interlockTrip'] === 1)
             {
                 interlockTripped.style.color = "red";
             }
@@ -258,7 +273,7 @@ window.onload = function () {
                 interlockTripped.style.color = "green";
             }
 
-            if (data['isolationFault'] === true)
+            if (data['isoFault'] === 1)
             {
                 isolationFault.style.color = "red";
             }
@@ -267,7 +282,7 @@ window.onload = function () {
                 isolationFault.style.color = "green";
             }
 
-            if (data['lowSOH'] === true)
+            if (data['lowSOH'] === 1)
             {
                 lowSOH.style.color = "red";
             }
@@ -276,7 +291,7 @@ window.onload = function () {
                 lowSOH.style.color = "green";
             }
 
-            if (data['dischargeOC'] === true)
+            if (data['dischargeOC'] === 1)
             {
                 dischargeOC.style.color = "red";
             }
@@ -285,7 +300,7 @@ window.onload = function () {
                 dischargeOC.style.color = "green";
             }
 
-            if (data['chargeOC'] === true)
+            if (data['chargeOC'] === 1)
             {
                 chargeOC.style.color = "red";
             }
@@ -294,7 +309,7 @@ window.onload = function () {
                 chargeOC.style.color = "green";
             }
 
-            if (data['hotTemp'] === true)
+            if (data['hotTemp'] === 1)
             {
                 hotTemp.style.color = "red";
             }
@@ -303,7 +318,7 @@ window.onload = function () {
                 hotTemp.style.color = "green";
             }
 
-            if (data['coldTemp'] === true)
+            if (data['coldTemp'] === 1)
             {
                 coldTemp.style.color = "red";
             }
@@ -312,7 +327,7 @@ window.onload = function () {
                 coldTemp.style.color = "green";
             }
 
-            if (data['highVolt'] === true)
+            if (data['highVolt'] === 1)
             {
                 highVoltage.style.color = "red";
                 batteryFull.style.color = "red";
@@ -323,7 +338,7 @@ window.onload = function () {
                 batteryFull.style.color = "green"
             }
 
-            if (data['lowVolt'] === true)
+            if (data['lowVolt'] === 1)
             {
                 lowVoltage.style.color = "red";
                 batteryLow.style.color = "red"
@@ -342,6 +357,7 @@ window.onload = function () {
         function (data) {
             
             lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battVoltage.innerHTML = data['packVoltage'];
             battMaxCellVoltage.innerHTML = data['maxVoltage'];
             battMinCellVoltage.innerHTML = data['minVoltage'];
@@ -354,6 +370,7 @@ window.onload = function () {
         function (data) {
             
             lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battCurrent.innerHTML = data['current'];
 
         }
@@ -364,6 +381,7 @@ window.onload = function () {
         function (data) {
             
             lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battSOC.innerHTML = data['stateOfCharge'];
 
         }
@@ -372,8 +390,11 @@ window.onload = function () {
     socket.on(
         'motor-faults',
         function (data) {
+
+            lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             
-            if (data['voltageLockOut'] === true)
+            if (data['voltageLockOut'] === 1)
             {
                 voltageLockout.style.color = "red";
             }
@@ -382,7 +403,7 @@ window.onload = function () {
                 voltageLockout.style.color = "green";
             }
 
-            if (data['configError'] === true)
+            if (data['configError'] === 1)
             {
                 configError.style.color = "red";
             }
@@ -391,7 +412,7 @@ window.onload = function () {
                 configError.style.color = "green";
             }
 
-            if (data['watchdogReset'] === true)
+            if (data['watchdogReset'] === 1)
             {
                 watchdogReset.style.color = "red";
             }
@@ -400,7 +421,7 @@ window.onload = function () {
                 watchdogReset.style.color = "green";
             }
 
-            if (data['DCOverVoltage'] === true)
+            if (data['DCOverVoltage'] === 1)
             {
                 dcOV.style.color = "red";
             }
@@ -409,7 +430,7 @@ window.onload = function () {
                 dcOV.style.color = "green";
             }
 
-            if (data['softwareOverCurrent'] === true)
+            if (data['softwareOverCurrent'] === 1)
             {
                 softwareOC.style.color = "red";
             }
@@ -418,7 +439,7 @@ window.onload = function () {
                 softwareOC.style.color = "green";
             }
 
-            if (data['hardwareOverCurrent'] === true)
+            if (data['hardwareOverCurrent'] === 1)
             {
                 hardwareOC.style.color = "red";
             }
@@ -434,18 +455,30 @@ window.onload = function () {
         function(data) {
             
             lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             motorCurrent.innerHTML = data['busCurrent'];
+            motorVoltage.innerHTML = data['busVoltage'];
+        }
+    )
 
+    socket.on(
+        'motor-temperature',
+        function(data) {
+            
+            lastTimestamp.innerHTML = data['timeStamp'];
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
+            motorTemp.innerHTML = data['motorTemp'];
+            mcTemp.innerHTML = data['motorControllerTemp'];
+            
         }
     )
 
     socket.on(
         'motor-velocity',
         function(data) {
-            
             lastTimestamp.innerHTML = data['timeStamp'];
-            motorSpeed.innerHTML = data['velocity'];
-
+            lastID.innerHTML = "0x".concat(data['ID'].toString(16));
+            motorVelocity.innerHTML = data['velocity'];
         }
     )
 
