@@ -1,5 +1,5 @@
 # Telemetry-Interface
-Data visualization interface for UBC Solar's Daybreak vehicle
+Data visualization interface for UBC Solar's Daybreak vehicle.
 
 To set up this project locally,
 
@@ -14,6 +14,16 @@ npm install
 npm start
 ```
 Then point your browser to http://localhost:3000
+
+5. Navigate to the sender/ folder and run main.py . This will receive serial data from a COM port and make HTTP requests to the web server.
+
+
+To Do:
+- Modify the python script to receive serial data from a COM port
+- Display battery data with a real time plot using chart.js
+- Stress testing by sending a lot of serial data rapidly
+- Integration with radio link
+- Add Map and Weather data using some web APIs.
 
 
 
