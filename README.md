@@ -24,6 +24,7 @@ To Do:
 - Stress testing by sending a lot of serial data rapidly
 - Integration with radio link
 - Add Map and Weather data using some web APIs.
+- Fix the CSS: change px to rem/em so it fits every screen properly
 
 
 
