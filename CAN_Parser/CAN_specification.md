@@ -1,6 +1,6 @@
 # CAN specification document
 This document details how every important CAN message should be represented as a JSON object.
-This ensures that people working on the front end and on the back end are on the same page.
+This ensures that all parties agree to the same definition of the JSON objects.
 
 Incoming CAN messages will be represented as a JSON object:
 ```
@@ -22,7 +22,7 @@ var data =
 {
     "msg-id": <Integer from 0x000 to 0x7FF, representing a unique CAN ID>,
     "msg-source": <String, representing the source of the message("bms", "motor-controller")>,
-    "timestamp": <Integer, representing the UNIX time the message was sent.>,
+    "timeStamp": <Integer, representing the UNIX time the message was sent.>,
     "data": 
         {
             "ave-batt-temp": <Integer, in degrees Celsius>,
@@ -39,7 +39,7 @@ var data =
 var send = 
 {
     "ID": "0x622",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "relayFault": relayFault,
     "K3": K3,
     "K2": K2,
@@ -79,7 +79,7 @@ var send =
 var send = 
 {
     "ID": "0x623",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "packVoltage": packVoltage,
     "minVoltage": minVoltage,
     "maxVoltage": maxVoltage 
@@ -92,7 +92,7 @@ var send =
 var send = 
 {
     "ID": "0x624",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "current": current
 }
 
@@ -103,7 +103,7 @@ var send =
 var send = 
 {
     "ID": "0x626",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "stateOfCharge": SOC
 }
 
@@ -114,7 +114,7 @@ var send =
 var send = 
 {
     "ID": "0x627",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "temperature": temperature,
     "minTemp": minTemp,
     "maxTemp": maxTemp
@@ -127,14 +127,14 @@ var send =
 var send = 
 {
     "ID": "0x401",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "voltageLockOut": voltageLockOut,
     "configError": configError,
     "watchdogReset": watchdogReset,
     "badMotor": badMotor,
     "DCOverVoltage": DCOverVoltage,
-    "softwareOverCurrent": softwareOvercurrent,
-    "hardwareOverCurrent": hardwareOvercurrent
+    "softwareOverCurrent": softwareOverCurrent,
+    "hardwareOverCurrent": hardwareOverCurrent
 }
 
 ```
@@ -144,7 +144,7 @@ var send =
 var send = 
 {
     "ID": "0x402",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "busCurrent": busCurrent,
     "busVoltage": busVoltage
 }
@@ -156,6 +156,8 @@ var send =
 var send = 
 {
     "ID": "0x403",
-    "TimeStamp": milli,
+    "timeStamp": milli,
     "velocity": velocity
 }
+
+```

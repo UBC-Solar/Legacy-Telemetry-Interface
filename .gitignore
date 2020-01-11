@@ -105,5 +105,5 @@ dist
 # TernJS port file
 .tern-port
 
-# OS X system files
+# OS X related files
 .DS_Store

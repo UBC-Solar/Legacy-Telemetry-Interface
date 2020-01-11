@@ -2,164 +2,317 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/stylesheet.css">
+    <title>Telemetry</title>
 </head>
 </head>
 
 <body>
 
-    <!-- Content for the sidebar -->
-    <div class="SideNav">
-        <img src="Solar_Logo.png" alt="UBC Solar Logo">
+    <!-- Titlebaar contains the title of the webapp -->
+    <div id="Titlebar">
+        <img src="img/logo.png" alt="UBC Solar Logo" id="Titlebar-Emblem-SolarLogo">
 
-        <div id="SideNavTitle">Telemetry Interface</div>
+        <table id="Titlebar-table">
+            <tr>
+                <td><h2 class="Titlebar-mainheader">Telemetry Interface for Daybreak</h2></td>
+            </tr>
+        </table>
+    </div>
 
-        <div id="SideNavTitle">Connection Status</div>
-        <div id="data">
-            <h4 id="server-connected-disconnected">Disconnected</h4>
+    <!-- Sidebar contains the most critical information -->
+    <div id="SideNav">
+
+        <div id="SideNav-Emblem">
+            <!--
+            <img src="Solar_Logo.png" alt="UBC Solar Logo" id="SideNav-Emblem-Solarlogo">
+            -->
+            <h2 class="SideNav-mainheader">Vehicle Dashboard</h2>
         </div>
 
-        <div id="SideNavTitle">Velocity</div>
-        <div id="data">
-            <h4 id="velocity">-</h4>
+        <!-- Communications status -->
+        
+        <div id="SideNav-Communications">
+            <h3 class="SideNav-header"> Communciations</h3>
+            <table class="SideNav-table">
+                <tr>
+                    <td>Server Status: </td>
+                    <td id="server-status">Disconnected</td>
+                </tr>
+                <tr>
+                    <td>Timestamp: </td>
+                    <td id="last-timestamp">-</td>
+                </tr>
+                <tr>
+                    <td>Message ID: </td>
+                    <td id="last-id">-</td>
+                </tr>
+                <tr>
+                    <td>Radio RSSI (dbm): </td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Cell RSSI (dbm): </td>
+                    <td>-</td>
+                </tr>
+            </table>
+        </div>
+        
+
+        <!-- Summary of battery status -->
+        <div id="SideNav-BatterySummary">
+            <h3 class="SideNav-header">Battery Summary</h3>
+            <table class="SideNav-table">
+                <tr>
+                    <td>Pack Voltage</td>
+                    <td id="batt-voltage">000.0</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>Min. Cell Voltage</td>
+                    <td id="batt-min-cell-voltage">000.0</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>Max. Cell Voltage</td>
+                    <td id="batt-max-cell-voltage">000.0</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>Pack Current</td>
+                    <td id="batt-current">000.0</td>
+                    <td>A</td>
+                </tr>  
+                <tr>
+                    <td>Max. Temperature</td>
+                    <td id="batt-max-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>Min. Temperature</td>
+                    <td id="batt-min-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>Ave. Temperature</td>
+                    <td id="batt-ave-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>State of Charge</td>
+                    <td id="batt-soc">000.0</td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td>Supp. Voltage</td>
+                    <td id="batt-supp-voltage">000.0</td>
+                    <td>V</td>
+                </tr>
+            </table>
         </div>
 
-        <div id="SideNavTitle">Battery Current</div>
-        <div id="data">
-            <h4 id="batt-current">-</h4>
+        <!-- Summary of motor status -->
+        <div id="SideNav-MotorSummary">
+            <h3 class="SideNav-header">Motor Summary</h3>
+            <table class="SideNav-table">
+                <tr>
+                    <td>Speed</td>
+                    <td id="motor-velocity">000.0</td>
+                    <td>km/h</td>
+                </tr>
+                <tr>
+                    <td>Current</td>
+                    <td id="motor-current">000.0</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>Voltage</td>
+                    <td id="motor-voltage">000.0</td>
+                    <td>V</td>
+                </tr>
+                <tr>
+                    <td>Temperature</td>
+                    <td id="motor-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>Heatsink</td>
+                    <td id="mc-temp">000.0</td>
+                    <td>C</td>
+                </tr>
+
+            </table>
         </div>
 
-        <div id="SideNavTitle">Battery Charge</div>
-        <div id="data">
-            <h4 id="batt-charge">-</h4>
+        <!-- Enumeration of most crucial battery faults-->
+        <div id="SideNav-BatteryFaults">
+            <h3 class="SideNav-header">Battery Faults</h3>
+            <table class="SideNav-table">
+                <tr>
+                    <td id="battery-low">Battery Low</td>
+                    <td id="battery-full">Battery Full</td>
+                    <td id="comm-fault">Comm. Fault</td>
+                </tr>
+                <tr>
+                    <td id="chg-overcurrent">Charge Overcurrent</td>
+                    <td id="dchg-overcurrent">Discharge Overcurrent</td>
+                    <td id="overtemp">Overtemperature</td>
+
+                </tr>
+                <tr>
+                    <td id="undervoltage">Undervoltage</td>
+                    <td id="overvoltage">Overvoltage</td>
+                    <td id="general-fault">General Fault</td>
+                </tr>
+            </table>
         </div>
 
-        <div id="SideNavTitle">Battery Voltage</div>
-        <div id="data">
-            <h4 id="batt-voltage">-</h4>
+    </div>
+
+    <div id="GraphNav">
+
+        <!--
+        - Battery Temperature
+        - Motor Temperature
+        - Speed
+        - Motor Current + Pack Current
+        -->
+
+        <div id="GraphNav-Title">
+            <h1>Time Series Graphs</h1>
         </div>
 
-        <div id="SideNavTitle">Battery Temperature</div>
-        <div id="data">
-            <h4 id="batt-temp">-</h4>
+        <div id="GraphNav-Temp">
+            <h2> Temperature time-series here</h2>            
         </div>
 
-        <div id="SideNavTitle">Weather</div>
-        <div id="data">
-            <h5>Weather goes here</h5>
+        <div id="GraphNav-Speed">
+            <h2> Speed time-series here</h2>
         </div>
+
+        <div id="GraphNav-Current">
+            <h2> Current time-series here</h2>
+        </div>
+
     </div>
 
     <!-- Tabs -->
     <script type="text/javascript" src="js/tabs.js"></script>
-    <button class="tablink" onclick="openPage('Battery', this, '#009933')" id="defaultOpen">Battery</button>
-    <button class="tablink" onclick="openPage('Motor', this, '#009933')">Motor</button>
-    <button class="tablink" onclick="openPage('Array', this, '#009933')">Array</button>
-    <button class="tablink" onclick="openPage('Error', this, '#009933')">Error</button>
-    <button class="tablink" onclick="openPage('Maps', this, '#009933')">Maps</button>
+    <div id="tab-bar">
+        
+        <button class="tablink" onclick="openPage('Faults', this, '#0033cc')" id="defaultOpen"><h3>Other Faults</h3></button>
+        <button class="tablink" onclick="openPage('Maps', this, '#0033cc')"><h3>Maps</h3></button>
+        <button class="tablink" onclick="openPage('Simulation', this, '#0033cc')"><h3>Simulation</h3></button>
+    </div>
 
-    <!-- Creating the content for each individual tab -->
-    <div class="main">
-        <div id="Maps" class="tabcontent">
-            <div id="column">
-                <h3 id="Location">Location</h3>
-                <div id="data">
-                    <h4>Google Map Data</h4>
-                    <div id="googleMap" style="width:500px;height:500px"></div>
-                    <script type="text/javascript" src="./script/map.js"></script>
-                    <!-- Google Maps API: replace KEY_HERE with your API keys                    -->
-                    <!-- https://developers.google.com/maps/documentation/javascript/get-api-key -->
-                    <script src="https://maps.googleapis.com/maps/api/js?key=KEY_HERE&callback=myMap"></script>
-                </div>
-            </div>
+    <!-- Battery Tab -->
+    <div id="Faults" class="tabcontent">
 
-            <div id="column">
-                <h3 id="WindSpeed">Wind Speed</h3>
-                <div id="data">
-                    <h4>WindSpeed Here</h4>
-                </div>
-            </div>
+        <!-- BMS State -->
+        <div id="Faults-bmsState">
+            <h3 class="Faults-header">BMS State</h3>
+            <table class = "tab-table">
+                <tr>
+                    <td id="relay-fault">Relay Fault</td>
+                    <td id="k3-contactor">K3 Contactor On</td>
+                    <td id="k2-contactor">K2 Contactor On</td>
+                </tr>
+                <tr>
+                    <td id="k1-contactor">K1 Contactor On</td>
+                    <td id="fault-state">Fault State</td>
+                    <td> - </td>
+                </tr>
+            </table>
         </div>
 
-        <div id="Battery" class="tabcontent">
-            <div id="column">
-                <h3>Flags</h3>
-                <div id="data">
-                    <h4>Flag Data Here</h4>
-                </div>
-            </div>
-            <div id="column">
-                <h3>Faultcode</h3>
-                <div id="data">
-                    <h4>Faultcode Data Here</h4>
-                </div>
-            </div>
-            <div id="column">
-                <h3>Peak Voltage</h3>
-                <div id="data">
-                    <h4>Voltage Data Here</h4>
-                </div>
-            </div>
-            <div id="column">
-                <h3>Current</h3>
-                <div id="data">
-                    <h4>Current Data here</h4>
-                </div>
-            </div>
+        <!-- Other Battery Fault Codes -->
+        <div id="Faults-batteryFault">
+            <h3 class="Faults-header">Battery Faults</h3>
+            <table class="tab-table">
+                <tr>
+                    <td id="fan-on">Fan On</td>
+                    <td id="llim-set">LLIM Set</td>
+                    <td id="hlim-set">HLIM Set</td>
+                </tr>
+                <tr>
+                    <td id="can-contactor">CAN Contactor Request</td>
+                    <td id="hardwire-contactor">Hardwire Contactor Request</td>
+                    <td id="interlock-tripped">Interlock Tripped</td>
+                </tr>
+                <tr>
+                    <td id="load-power">Power from Load</td>
+                    <td id="source-power">Power from Source</td>
+                    <td> - </td>
+                </tr>
+            </table>
         </div>
 
-        <div id="Array" class="tabcontent">
-            <div id="column">
-                <h3>Array</h3>
-            </div>
+        <!-- Battery Warning Flags -->
+        <div id="Faults-batteryWarning">
+            <h3 class="Faults-header">Battery Warning</h3>
+            <table class="tab-table">
+                <tr>
+                    <td id="isolation-fault">Isolation Fault</td>
+                    <td id="low-soh">Low SOH</td>
+                    <td id="hot-temp">Hot Temperature</td>
+                </tr>
+                <tr>
+                    <td id="cold-temp">Cold Temperature</td>
+                    <td id="high-voltage">High Voltage</td>
+                    <td id="low-voltage">Low Voltage</td>
+                </tr>
+            </table>
         </div>
 
-        <div id="Error" class="tabcontent">
-            <div id="column">
-                <h3>Error</h3>
-                <div id="data">
-                    <h4>Error Messages here</h4>
-                </div>
-            </div>
+        <!-- Motor Warnings -->
+        <div id="Faults-motorWarning">
+            <h3 class="Faults-header">Motor Warning</h3>
+            <table class="tab-table">
+                <tr>
+                    <td id="voltage-lockout">Voltage Lock-out</td>
+                    <td id="config-error">Configuration Error</td>
+                    <td id="watchdog-reset">Watchdog Reset</td>
+                </tr>
+                <tr>
+                    <td id="dc-overvoltage">DC Over-voltage</td>
+                    <td id="software-overcurrent">Software Over-current</td>
+                    <td id="hardware-overcurrent">Hardware Over-current</td>
+                </tr>
+            </table>
         </div>
+        
+    </div>
 
-        <div id="Motor" class="tabcontent">
-            <div id="column">
-                <h3>Motor Speed</h3>
-                <div id="data">
-                    <h4>Speed Data here</h4>
-                </div>
-            </div>
-            <div id="column">
-                <h3>Motor Temp</h3>
-                <div id="data">
-                    <h4>Motor Temp Here</h4>
-                </div>
-            </div>
-            <div id="column">
-                <h3>Motor Controller Temp</h3>
-                <div id="data">
-                    <h4>Controller Temp Here</h4>
-                </div>
-            </div>
-            <div id="column">
-                <h3>Bus Voltage</h3>
-                <div id="data">
-                    <h4>Voltage Data Here</h4>
-                </div>
-            </div>
-            <div id="column">
-                <h3>Bus Current</h3>
-                <div id="data">
-                    <h4>Current Data Here</h4>
-                </div>
-            </div>
-        </div>
+    <div id="Maps" class="tabcontent">
+
+        <p>Maps and weather information go here</p>
+
+        <!-- Insert hopes and dreams here -->
+            
+        <!--
+        <h3 id="Location">Location</h3>
+        <h4>Google Map Data</h4>
+        <div id="googleMap" style="width:500px;height:500px"></div>
+        <script type="text/javascript" src="./script/map.js"></script>
+        -->
+        <!-- Google Maps API: replace KEY_HERE with your API keys                    -->
+        <!-- https://developers.google.com/maps/documentation/javascript/get-api-key -->
+        <!--
+        <script src="https://maps.googleapis.com/maps/api/js?key=KEY_HERE&callback=myMap"></script>
+        -->
+    </div>
+
+    <div id="Simulation" class="tabcontent">
+
+        <p>Simulations and the result of data models go here</p>
 
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
+
+    <script src="js/tabs.js"></script>
 </body>
 
 </html>
