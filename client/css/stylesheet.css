@@ -11,6 +11,56 @@ td {
     font-size: 1.5vmin;
 }
 
+/* Making this stuff responsive for smaller screen sizes */
+@media only screen and (max-width: 600px) {
+    #Titlebar {
+        width: 100% !important;
+        float: top !important;
+        left: 2% !important;
+        position: relative !important;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #SideNav {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        top: 2% !important;
+        position: relative !important;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #GraphNav {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        top: 5% !important;
+        position: relative !important;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #tab-bar {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        top: 8% !important;
+        position: relative !important;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .tabcontent {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        top: 10% !important;
+        position: relative !important;
+    }
+}
+
 /* Titlebar*/
 
 #Titlebar {
