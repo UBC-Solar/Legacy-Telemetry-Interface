@@ -3,12 +3,12 @@
 body {
     background-image: url('../img/background.jpg');
     color: lightcyan;
-    font-family: Calibri;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 td {
-    padding: 1%;
-    font-size: 20px;
+    margin: 1%;
+    font-size: 1.5vmin;
 }
 
 /* Titlebar*/
@@ -16,17 +16,17 @@ td {
 #Titlebar {
     background-color:#2a2a45;
     position: fixed;
-    height: 10%;
+    height: 11%;
     width: 35%;
 
-    border-radius: 3%;
+    border-radius: 2vmax;
 }
 
 #Titlebar-Emblem-SolarLogo {
     position: absolute;
-    height: 95%;
-    top: 2.5%;
-    left: 10%;
+    height: 9vmin;
+    top: 8%;
+    left: 2%;
 }
 
 #Titlebar-table {
@@ -39,6 +39,11 @@ td {
     color: lightcyan;
 }
 
+.Titlebar-mainheader {
+    padding-top: 3.5%;
+    font-size: 3vmin;
+}
+
 /* Sidebar*/
 
 #SideNav {
@@ -46,60 +51,65 @@ td {
     position: fixed;
     height: 85%;
     width: 35%;
-    top: 12.5%;
+    top: 13%;
 
-    border-radius: 3%;
+    border-radius: 2vw;
 }
 
 #SideNav-Emblem {
-    position: absolute;
-    top: 5%;
-    left: 2.5%;
-    width: 45%;
-    height: 10%;
+    position: relative;
+    top: 1vw;
+    left: 1vw;
+    width: 46%;
+    height: 15%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 
 #SideNav-Communications {
     position: absolute;
-    top: 36%;
-    right: 2.5%;
+    top: 38%;
+    right: 1vmax;
+    height: 31%;
     width: 45%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vmax;
 }
 
 #SideNav-BatterySummary {
     position: absolute;
-    top: 20.5%;
-    left: 2.5%;
-    width: 45%;
+    top: 19%;
+    left: 1vmax;
+    width: 46%;
+    height: 50%;
 
+    border-spacing: 1%;
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 
 #SideNav-MotorSummary {
     position: absolute;
-    top: 5%;
-    right: 2.5%;
+    top: 1vw;
+    right: 1vw;
     width: 45%;
+    height: 34%;
     
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 
 #SideNav-BatteryFaults {
     position: absolute;
-    top: 70%;
+    bottom: 2%;
     right: 2.5%;
-    width: 95%;
+    width: 94%;
+    height: 26%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 3vh;
 }
 
 /* SideNav lower elements */
@@ -111,21 +121,18 @@ td {
 }
 
 .SideNav-header {
-    font-size: 20px;
+    font-size: 3vmin;
     text-align: center;
 }
 
 .SideNav-mainheader {
-    font-size: 30px;
+    font-size: 3vmin;
     text-align: center;
 }
 
 .SideNav-table {
-    font-size: 20px;
-
     width: 100%;
     padding: 2%;
-    
 }
 
 /* graph tab */
@@ -133,24 +140,25 @@ td {
 #GraphNav {
     position: fixed;
     left: 36%;
-    height: 96.75%;
+    height: 97%;
     width: 30%;
     background-color:#2a2a45;
+    font-size: 1.5vmin;
 
-    border-radius: 3%;
+    border-radius: 2vmax;
 }
 
 #GraphNav-Title {
     position: absolute;
-    width: 95%;
-    height: 10%;
+    width: 94%;
+    height: 9%;
     left: 2.5%;
     top: 2%;
 
     text-align: center;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vmax;
 }
 
 #GraphNav-Temp {
@@ -186,13 +194,13 @@ td {
 /* Style tab links */
 
 #tab-bar {
-    background-color:#2a2a45;
+    /* background-color:#2a2a45; */
     position: fixed;
     width: 33%;
     left: 66.5%;
     height: 10%;
 
-    border-radius: 3%;
+    border-radius: 25%;
 }
 
 .tablink {
@@ -200,11 +208,15 @@ td {
     text-align: center;
     border: none;
     outline: none;
+    top: 1%;
     padding-top: 1%;
     padding-bottom: 1%;
-    font-size: 20px;
-    width: 32.5%;
-    height: 100%;
+    padding-left: 1%;
+    font-size: 2vmin;
+    width: 32%;
+    height: 105%;
+
+    border-radius: 2vw;
 }
 
 .tablink:hover {
@@ -221,7 +233,9 @@ td {
     left: 66.5%;
     top: 12.5%;
 
-    border-radius: 3%;
+    font-size: 2vmin;
+
+    border-radius: 2vw;
 }
 
 #Faults {
@@ -230,42 +244,46 @@ td {
 
 #Faults-bmsState {
     position: absolute;
-    top: 4.5%;
+    top: 2%;
     left: 2.5%;
     width: 95%;
+    height: 22.5%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 
 #Faults-batteryFault {
     position: absolute;
-    top: 25%;
+    top: 26.5%;
     left: 2.5%;
     width: 95%;
+    height: 22.5%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 
 #Faults-batteryWarning {
     position: absolute;
-    top: 53.5%;
+    top: 51%;
     left: 2.5%;
     width: 95%;
+    height: 22.5%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 
 #Faults-motorWarning {
     position: absolute;
-    top: 74.5%;
+    top: 75.5%;
     left: 2.5%;
     width: 95%;
+    height: 22.5%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 
 .Faults-header {
