@@ -14,7 +14,7 @@ td {
 /* Making this stuff responsive for smaller screen sizes */
 @media only screen and (max-width: 600px) {
     #Titlebar {
-        width: 100% !important;
+        width: 96% !important;
         float: top !important;
         left: 2% !important;
         position: relative !important;
