@@ -1,6 +1,5 @@
 
 window.onload = function () {
-
     var serverStatus = document.getElementById('server-status');
     var lastTimestamp = document.getElementById('last-timestamp');
     var lastID = document.getElementById('last-id');
@@ -61,6 +60,36 @@ window.onload = function () {
     var softwareOC = document.getElementById('software-overcurrent');
     var hardwareOC = document.getElementById('hardware-overcurrent');
 
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var tempChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Temperature',
+                data: [],
+                fill: false,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+    });
+
     var socket = io();
 
     socket.on(
@@ -80,6 +109,13 @@ window.onload = function () {
             battMaxTemp.innerHTML = data['maxTemp'];
             battMinTemp.innerHTML = data['minTemp'];
             battAveTemp.innerHTML = data['temperature'];
+            
+            let chartData = getData(data['temperature'], data['timeStamp']);
+
+            if (chartData.valid) {
+                updateChart(tempChart, chartData.data, chartData.timeStamp);
+            }
+            
         }
 
     )
@@ -481,5 +517,45 @@ window.onload = function () {
             motorVelocity.innerHTML = data['velocity'];
         }
     )
+
+    function updateChart(chart, data, timeStamp) {
+        let sizeLabels = chart.data.labels.push(timeStamp);
+        let sizeData = chart.data.datasets[0].data.push(data);
+
+        if (sizeLabels > 10) {
+            chart.data.labels.shift();
+        }
+        if (sizeData > 10) {
+            chart.data.datasets[0].data.shift();
+        }
+
+        chart.update();
+    }
+
+    function getData(data, timeStamp) {
+        let roundedTime = Math.round(parseFloat(timeStamp));
+        let timeDiff = Math.abs(parseFloat(timeStamp) - roundedTime);
+        let valid = false;
+
+        if (timeDiff < 0.005) {
+            valid = true;
+            return {data, timeStamp, valid};
+        }
+
+        return {data, timeStamp, valid};
+    }
+
+    var tempTimeCount = 0;
+
+    setInterval(function() {
+        let data = Math.floor(Math.random() * 100) + 1
+        let chartData = getData(data, tempTimeCount);
+
+        if (chartData.valid) {
+            updateChart(tempChart, chartData.data, chartData.timeStamp);
+        }
+
+        tempTimeCount += 0.5;
+    }, 500);
 
 }
