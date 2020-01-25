@@ -60,15 +60,18 @@ window.onload = function () {
     var softwareOC = document.getElementById('software-overcurrent');
     var hardwareOC = document.getElementById('hardware-overcurrent');
 
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var tempChart = new Chart(ctx, {
+    var tempCtx = document.getElementById('tempChart').getContext('2d');
+    var vAndACtx = document.getElementById('vAndAChart').getContext('2d');
+
+    var tempChart = new Chart(tempCtx, {
         type: 'line',
         data: {
             labels: [],
             datasets: [{
-                label: 'Temperature',
+                label: 'Temperature in Celsius',
                 data: [],
                 fill: false,
+                yAxisID: 'temp-axis',
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -88,7 +91,100 @@ window.onload = function () {
                 borderWidth: 1
             }]
         },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    id: 'temp-axis',
+                    type: 'linear',
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        stepSize: 10,
+                    }
+                }]
+            }
+        }
+
+        
     });
+
+    var vAndAChart = new Chart(vAndACtx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Voltage in V',
+                data: [],
+                fill: false,
+                yAxisID: 'left-y-axis',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(246, 71, 71, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }, {
+                label: 'Current in A',
+                data: [],
+                fill: false,
+                yAxisID: 'right-y-axis',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(44, 130, 201, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    id: 'left-y-axis',
+                    type: 'linear',
+                    position: 'left',
+                    ticks: {
+                        min: 0,
+                        max: 120,
+                        stepSize: 10,
+                    }
+                }, {
+                    id: 'right-y-axis',
+                    type: 'linear',
+                    position: 'right',
+                    ticks: {
+                        min: 0,
+                        max: 60,
+                        stepSize: 5
+                    }
+                }]
+            }
+        }
+    });
+
 
     var socket = io();
 
@@ -113,7 +209,7 @@ window.onload = function () {
             let chartData = getData(data['temperature'], data['timeStamp']);
 
             if (chartData.valid) {
-                updateChart(tempChart, chartData.data, chartData.timeStamp);
+                updateChart(tempChart, chartData.data, chartData.timeStamp, 0);
             }
             
         }
@@ -398,6 +494,11 @@ window.onload = function () {
             battMaxCellVoltage.innerHTML = data['maxVoltage'];
             battMinCellVoltage.innerHTML = data['minVoltage'];
 
+            let chartData = getData(data['packVoltage'], data['timeStamp']);
+
+            if (chartData.valid) {
+                updateChart(vAndAChart, chartData.data, chartData.timeStamp, 0);
+            }
         }
     )
 
@@ -409,6 +510,11 @@ window.onload = function () {
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battCurrent.innerHTML = data['current'];
 
+            let chartData = getData(data['current'], data['timeStamp']);
+
+            if (chartData.valid) {
+                updateChartNoX(vAndAChart, chartData.data, 1);
+            }
         }
     )
 
@@ -518,15 +624,25 @@ window.onload = function () {
         }
     )
 
-    function updateChart(chart, data, timeStamp) {
+    function updateChart(chart, data, timeStamp, dataSet) {
         let sizeLabels = chart.data.labels.push(timeStamp);
-        let sizeData = chart.data.datasets[0].data.push(data);
+        let sizeData = chart.data.datasets[dataSet].data.push(data);
 
         if (sizeLabels > 10) {
             chart.data.labels.shift();
         }
         if (sizeData > 10) {
-            chart.data.datasets[0].data.shift();
+            chart.data.datasets[dataSet].data.shift();
+        }
+
+        chart.update();
+    }
+
+    function updateChartNoX(chart, data, dataSet) {
+        let sizeData = chart.data.datasets[dataSet].data.push(data);
+
+        if (sizeData > 10) {
+            chart.data.datasets[dataSet].data.shift();
         }
 
         chart.update();
@@ -552,7 +668,21 @@ window.onload = function () {
         let chartData = getData(data, tempTimeCount);
 
         if (chartData.valid) {
-            updateChart(tempChart, chartData.data, chartData.timeStamp);
+            updateChart(tempChart, chartData.data, chartData.timeStamp, 0);
+        }
+
+        let data2 = Math.floor(Math.random() * 120) + 1
+        let chartData2 = getData(data2, tempTimeCount);
+
+        if (chartData2.valid) {
+            updateChart(vAndAChart, chartData2.data, chartData2.timeStamp, 0);
+        }
+
+        let data3 = Math.floor(Math.random() * 60) + 1
+        let chartData3 = getData(data3, tempTimeCount);
+
+        if (chartData3.valid) {
+            updateChartNoX(vAndAChart, chartData3.data, 1);
         }
 
         tempTimeCount += 0.5;
