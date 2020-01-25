@@ -194,7 +194,7 @@ window.onload = function () {
             serverStatus.innerHTML = "Connected";
             serverStatus.style.color = "green";
         }
-    )
+    );
 
     socket.on(
         'battery-temperature',
@@ -214,7 +214,7 @@ window.onload = function () {
             
         }
 
-    )
+    );
 
     socket.on(
         'battery-faults',
@@ -482,7 +482,7 @@ window.onload = function () {
             }
 
         }
-    )
+    );
 
     socket.on(
         'battery-voltage',
@@ -500,7 +500,7 @@ window.onload = function () {
                 updateChart(vAndAChart, chartData.data, chartData.timeStamp, 0);
             }
         }
-    )
+    );
 
     socket.on(
         'battery-current',
@@ -516,7 +516,7 @@ window.onload = function () {
                 updateChartNoX(vAndAChart, chartData.data, 1);
             }
         }
-    )
+    );
 
     socket.on(
         'battery-soc',
@@ -527,7 +527,7 @@ window.onload = function () {
             battSOC.innerHTML = data['stateOfCharge'];
 
         }
-    )
+    );
 
     socket.on(
         'motor-faults',
@@ -590,7 +590,7 @@ window.onload = function () {
                 hardwareOC.style.color = "green";
             }
         }
-    )
+    );
 
     socket.on(
         'motor-power',
@@ -601,7 +601,7 @@ window.onload = function () {
             motorCurrent.innerHTML = data['busCurrent'];
             motorVoltage.innerHTML = data['busVoltage'];
         }
-    )
+    );
 
     socket.on(
         'motor-temperature',
@@ -613,7 +613,7 @@ window.onload = function () {
             mcTemp.innerHTML = data['motorControllerTemp'];
             
         }
-    )
+    );
 
     socket.on(
         'motor-velocity',
@@ -622,7 +622,7 @@ window.onload = function () {
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             motorVelocity.innerHTML = data['velocity'];
         }
-    )
+    );
 
     function updateChart(chart, data, timeStamp, dataSet) {
         let sizeLabels = chart.data.labels.push(timeStamp);
@@ -687,5 +687,4 @@ window.onload = function () {
 
         tempTimeCount += 0.5;
     }, 500);
-
 }
