@@ -26,7 +26,7 @@ io.on(
         io.emit('introduction');
         console.log("socket connection initialized");
     }
-)
+);
 
 http.createServer(
     (request, response) => {
