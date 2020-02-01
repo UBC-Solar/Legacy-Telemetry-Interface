@@ -1,7 +1,7 @@
 /* Body*/
 
 body {
-    background-image: url('../img/background.jpg');
+    background-color: #4B5358;
     color: lightcyan;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -9,65 +9,17 @@ body {
 td {
     margin: 1%;
     font-size: 1.5vmin;
-}
-
-/* Making this stuff responsive for smaller screen sizes */
-@media only screen and (max-width: 600px) {
-    #Titlebar {
-        width: 96% !important;
-        float: top !important;
-        left: 2% !important;
-        position: relative !important;
-    }
-}
-
-@media only screen and (max-width:600px) {
-    #SideNav {
-        width: 96% !important;
-        float: top !important;
-        left: 2% !important;
-        top: 2% !important;
-        position: relative !important;
-    }
-}
-
-@media only screen and (max-width:600px) {
-    #GraphNav {
-        width: 96% !important;
-        float: top !important;
-        left: 2% !important;
-        top: 5% !important;
-        position: relative !important;
-    }
-}
-
-@media only screen and (max-width:600px) {
-    #tab-bar {
-        width: 96% !important;
-        float: top !important;
-        left: 2% !important;
-        top: 8% !important;
-        position: relative !important;
-    }
-}
-
-@media only screen and (max-width:600px) {
-    .tabcontent {
-        width: 96% !important;
-        float: top !important;
-        left: 2% !important;
-        top: 10% !important;
-        position: relative !important;
-    }
+    padding-bottom: 1vmin;
 }
 
 /* Titlebar*/
 
 #Titlebar {
-    background-color:#2a2a45;
+    background-color:#58A4B0;
     position: fixed;
     height: 11%;
-    width: 35%;
+    width: 33%;
+    left: 1.5%;
 
     border-radius: 2vmax;
 }
@@ -81,7 +33,7 @@ td {
 
 #Titlebar-table {
     position: absolute;
-    left: 30%;
+    left: 25%;
     width: 70%;
 }
 
@@ -97,7 +49,7 @@ td {
 /* Sidebar*/
 
 #SideNav {
-    background-color: #2a2a45;
+    background-color: #4B5358;
     position: fixed;
     height: 85%;
     width: 35%;
@@ -125,7 +77,11 @@ td {
     width: 45%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 2vmax;
+    border-radius: 2vw;
+}
+
+#SideNav-Communications td {
+    padding-bottom: 1vh;
 }
 
 #SideNav-BatterySummary {
@@ -140,6 +96,10 @@ td {
     border-radius: 2vw;
 }
 
+#SideNav-BatterySummary td {
+    padding-bottom: 1vh;
+}
+
 #SideNav-MotorSummary {
     position: absolute;
     top: 1vw;
@@ -151,15 +111,24 @@ td {
     border-radius: 2vw;
 }
 
+#SideNav-MotorSummary td {
+    padding-bottom: 1vh;
+}
+
 #SideNav-BatteryFaults {
     position: absolute;
     bottom: 2%;
-    right: 2.5%;
-    width: 94%;
+    left: 1vmax;
+    right: 1vmax;
+    width: 93%;
     height: 26%;
 
     border: 3px solid lightsteelblue;
-    border-radius: 3vh;
+    border-radius: 2vw;
+}
+
+#SideNav-BatteryFaults td {
+    padding-bottom: 1vh;
 }
 
 /* SideNav lower elements */
@@ -192,7 +161,7 @@ td {
     left: 36%;
     height: 97%;
     width: 30%;
-    background-color:#2a2a45;
+    background-color:#4B5358;
     font-size: 1.5vmin;
 
     border-radius: 2vmax;
@@ -203,7 +172,7 @@ td {
     width: 94%;
     height: 9%;
     left: 2.5%;
-    top: 2%;
+    top: 0.75%;
 
     text-align: center;
 
@@ -247,14 +216,14 @@ td {
     /* background-color:#2a2a45; */
     position: fixed;
     width: 33%;
-    left: 66.5%;
+    left: 67.5%;
     height: 10%;
 
     border-radius: 25%;
 }
 
 .tablink {
-    background-color: #2a2a45;
+    background-color: #E75A7C;
     text-align: center;
     border: none;
     outline: none;
@@ -263,19 +232,22 @@ td {
     padding-bottom: 1%;
     padding-left: 1%;
     font-size: 2vmin;
-    width: 32%;
+    width: 31%;
     height: 105%;
 
     border-radius: 2vw;
 }
 
 .tablink:hover {
-    background-color: lightsteelblue;
+    background-color:#A3C4BC;
 }
 
+.tablink:focus {
+    background-color: #A3C4BC !important;
+}
 /* Style for contents in each tabs */
 .tabcontent {
-    background-color:#2a2a45;
+    background-color:#4B5358;
     position: fixed;
     display: none;
     height: 85%;
@@ -347,9 +319,62 @@ td {
     padding: 1%;
 }
 
-.tablink {
-    color: lightcyan;
+/* Making this stuff responsive for smaller screen sizes */
+@media only screen and (max-width: 800px) {
+    #Titlebar {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        position: relative !important;
+    }
+
+    .Titlebar-mainheader {
+        left: 1vmin !important;
+        top: 2vmin !important;
+        font-size: auto !important;
+    }
+
+    #SideNav {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        top: 2% !important;
+        position: relative !important;
+    }
+
+    #SideNav-BatteryFaults {
+        width: auto !important;
+        top: 72% !important;
+    }
+
+    #GraphNav {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        top: 5% !important;
+        position: relative !important;
+    }
+
+    #tab-bar {
+        width: 96% !important;
+        float: top !important;
+        left: 5% !important;
+        top: 8% !important;
+        position: relative !important;
+    }
+
+
+    .tabcontent {
+        width: 96% !important;
+        float: top !important;
+        left: 2% !important;
+        top: 10% !important;
+        position: relative !important;
+    }
+
+    td {
+        font-size: 1.5vmax;
+    }
+
 }
-
-
 
