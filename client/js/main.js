@@ -1,67 +1,68 @@
 
 window.onload = function () {
-    var serverStatus = document.getElementById('server-status');
-    var lastTimestamp = document.getElementById('last-timestamp');
-    var lastID = document.getElementById('last-id');
+    const $ = document.getElementById.bind(document);
+    var serverStatus = $('server-status');
+    var lastTimestamp = $('last-timestamp');
+    var lastID = $('last-id');
 
-    var battVoltage = document.getElementById('batt-voltage');
-    var battMinCellVoltage = document.getElementById('batt-min-cell-voltage');
-    var battMaxCellVoltage = document.getElementById('batt-max-cell-voltage');
-    var battCurrent = document.getElementById('batt-current');
-    var battMaxTemp = document.getElementById('batt-max-temp');
-    var battMinTemp = document.getElementById('batt-min-temp');
-    var battAveTemp = document.getElementById('batt-ave-temp');
-    var battSOC = document.getElementById('batt-soc');
+    var battVoltage = $('batt-voltage');
+    var battMinCellVoltage = $('batt-min-cell-voltage');
+    var battMaxCellVoltage = $('batt-max-cell-voltage');
+    var battCurrent = $('batt-current');
+    var battMaxTemp = $('batt-max-temp');
+    var battMinTemp = $('batt-min-temp');
+    var battAveTemp = $('batt-ave-temp');
+    var battSOC = $('batt-soc');
 
-    var motorVelocity = document.getElementById('motor-velocity');
-    var motorTemp = document.getElementById('motor-temp');
-    var mcTemp = document.getElementById('mc-temp');
-    var motorCurrent = document.getElementById('motor-current');
-    var motorVoltage = document.getElementById('motor-voltage');
+    var motorVelocity = $('motor-velocity');
+    var motorTemp = $('motor-temp');
+    var mcTemp = $('mc-temp');
+    var motorCurrent = $('motor-current');
+    var motorVoltage = $('motor-voltage');
 
-    var batteryLow = document.getElementById('battery-low');
-    var batteryFull = document.getElementById('battery-full');
-    var batteryCommFault = document.getElementById('comm-fault');
+    var batteryLow = $('battery-low');
+    var batteryFull = $('battery-full');
+    var batteryCommFault = $('comm-fault');
 
-    var chargeOC = document.getElementById('chg-overcurrent');
-    var dischargeOC = document.getElementById('dchg-overcurrent');
-    var overTemp = document.getElementById('overtemp');
+    var chargeOC = $('chg-overcurrent');
+    var dischargeOC = $('dchg-overcurrent');
+    var overTemp = $('overtemp');
 
-    var undervoltage = document.getElementById('undervoltage');
-    var overvoltage = document.getElementById('overvoltage');
-    var generalFault = document.getElementById('general-fault');
+    var undervoltage = $('undervoltage');
+    var overvoltage = $('overvoltage');
+    var generalFault = $('general-fault');
 
-    var relayFault = document.getElementById('relay-fault');
-    var k3Contactor = document.getElementById('k3-contactor');
-    var k2Contactor = document.getElementById('k2-contactor');
-    var k1Contactor = document.getElementById('k1-contactor');
-    var faultState = document.getElementById('fault-state');
+    var relayFault = $('relay-fault');
+    var k3Contactor = $('k3-contactor');
+    var k2Contactor = $('k2-contactor');
+    var k1Contactor = $('k1-contactor');
+    var faultState = $('fault-state');
 
-    var fanOn = document.getElementById('fan-on');
-    var llimSet = document.getElementById('llim-set');
-    var hlimSet = document.getElementById('hlim-set');
-    var canContactor = document.getElementById('can-contactor');
-    var hardwireContactor = document.getElementById('hardwire-contactor');
-    var interlockTripped = document.getElementById('interlock-tripped');
-    var loadPower = document.getElementById('load-power');
-    var sourcePower = document.getElementById('source-power');
+    var fanOn = $('fan-on');
+    var llimSet = $('llim-set');
+    var hlimSet = $('hlim-set');
+    var canContactor = $('can-contactor');
+    var hardwireContactor = $('hardwire-contactor');
+    var interlockTripped = $('interlock-tripped');
+    var loadPower = $('load-power');
+    var sourcePower = $('source-power');
 
-    var isolationFault = document.getElementById('isolation-fault');
-    var lowSOH = document.getElementById('low-soh');
-    var hotTemp = document.getElementById('hot-temp');
-    var coldTemp = document.getElementById('cold-temp');
-    var highVoltage = document.getElementById('high-voltage');
-    var lowVoltage = document.getElementById('low-voltage');
+    var isolationFault = $('isolation-fault');
+    var lowSOH = $('low-soh');
+    var hotTemp = $('hot-temp');
+    var coldTemp = $('cold-temp');
+    var highVoltage = $('high-voltage');
+    var lowVoltage = $('low-voltage');
 
-    var voltageLockout = document.getElementById('voltage-lockout');
-    var configError = document.getElementById('config-error');
-    var watchdogReset = document.getElementById('watchdog-reset');
-    var dcOV = document.getElementById('dc-overvoltage');
-    var softwareOC = document.getElementById('software-overcurrent');
-    var hardwareOC = document.getElementById('hardware-overcurrent');
+    var voltageLockout = $('voltage-lockout');
+    var configError = $('config-error');
+    var watchdogReset = $('watchdog-reset');
+    var dcOV = $('dc-overvoltage');
+    var softwareOC = $('software-overcurrent');
+    var hardwareOC = $('hardware-overcurrent');
 
-    var tempCtx = document.getElementById('tempChart').getContext('2d');
-    var vAndACtx = document.getElementById('vAndAChart').getContext('2d');
+    var tempCtx = $('tempChart').getContext('2d');
+    var vAndACtx = $('vAndAChart').getContext('2d');
 
     var tempChart = new Chart(tempCtx, {
         type: 'line',
