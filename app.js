@@ -85,7 +85,7 @@ app.post("/", async (req, res) => {
         io.emit('motor-temperature', data);
     }
 
-    //res.status(200).send({message: "Received"});
+    res.status(200).send({message: "Received"});
 });
 
 module.exports = app;
