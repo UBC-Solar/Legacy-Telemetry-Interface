@@ -1,3 +1,5 @@
+//jshint esversion:8
+
 const debug = require("debug")("app:")
 const express = require('express');
 const app = express();
