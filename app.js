@@ -1,3 +1,5 @@
+//jshint esversion:8
+
 const debug = require("debug")("app:")
 const express = require('express');
 const app = express();
@@ -85,7 +87,7 @@ app.post("/", async (req, res) => {
         io.emit('motor-temperature', data);
     }
 
-    //res.status(200).send({message: "Received"});
+    res.status(200).send({message: "Received"});
 });
 
 module.exports = app;
