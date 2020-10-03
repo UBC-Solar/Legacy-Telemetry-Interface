@@ -285,21 +285,65 @@
 
     <div id="Maps" class="tabcontent">
 
-        <p>Maps and weather information go here</p>
+        <!--Weather at current location and time-->
+        
 
-        <!-- Insert hopes and dreams here -->
-            
-        <!--
-        <h3 id="Location">Location</h3>
-        <h4>Google Map Data</h4>
-        <div id="googleMap" style="width:500px;height:500px"></div>
-        <script type="text/javascript" src="./script/map.js"></script>
-        -->
+        <!--Spatial Map with Location-->
+        <div id="googleMap" style="width:100%;height:40%"></div> 
+
         <!-- Google Maps API: replace KEY_HERE with your API keys                    -->
         <!-- https://developers.google.com/maps/documentation/javascript/get-api-key -->
-        <!--
-        <script src="https://maps.googleapis.com/maps/api/js?key=KEY_HERE&callback=myMap"></script>
-        -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPgIT_5wtExgrIWN_Skl31yIg06XGtEHg&callback=myMap" async defer></script>
+
+        <!--Elevation Map with Location-->
+        <canvas id="elevationChart" width="100%" height="40%"></canvas> 
+
+        <table width="100%">
+            <tr>
+                <td>Time:</td>
+                <td id="current-time">-</td>
+            </tr>
+            <tr>
+                <td>Sunrise:</td>
+                <td id="sunrise-time">-</td>
+            </tr>
+            <tr>
+                <td>Sunset:</td>
+                <td id="sunset-time">-</td>
+            </tr>
+        </table>
+
+        <table width="100%">
+            <tr>
+                <td>Time</td>
+                <td>Temp(C)</td>
+                <td>Cloud(%)</td>
+                <td>Wind(m/s + dir)</td>
+                <td>Description</td>
+            </tr>
+            <tr>
+                <td>+0</td>
+                <td id = "temp-0"> - </td>
+                <td id = "cloud-0"> - </td>
+                <td id = "wind-0"> - </td>
+                <td id = "desc-0"> - </td>
+            </tr>
+            <tr>
+                <td>+3</td>
+                <td id = "temp-3"> - </td>
+                <td id = "cloud-3"> - </td>
+                <td id = "wind-3"> - </td>
+                <td id = "desc-3"> - </td>
+            </tr>
+            <tr>
+                <td>+6</td>
+                <td id = "temp-6"> - </td>
+                <td id = "cloud-6"> - </td>
+                <td id = "wind-6"> - </td>
+                <td id = "desc-6"> - </td>
+            </tr>
+        </table>
+
     </div>
 
     <div id="Simulation" class="tabcontent">
@@ -311,8 +355,9 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
-
+    <script type="text/javascript" src="js/map.js"></script>
     <script src="js/tabs.js"></script>
+
 </body>
 
 </html>
