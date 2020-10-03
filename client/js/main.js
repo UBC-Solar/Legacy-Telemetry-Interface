@@ -1,4 +1,3 @@
-
 window.onload = function () {
     const $ = document.getElementById.bind(document);
     var serverStatus = $('server-status');
@@ -63,6 +62,40 @@ window.onload = function () {
 
     var tempCtx = $('tempChart').getContext('2d');
     var vAndACtx = $('vAndAChart').getContext('2d');
+
+    var elevationChart = new Chart(elevationCtx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Elevation in Metres(m)',
+                data: [],
+                fill: false,
+                yAxisID: 'elevation-axis',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    id: 'elevation-axis',
+                    type: 'linear',
+                    ticks: {
+                        min: 0,
+                        max: 500,
+                        stepSize: 25,
+                    }
+                }]
+            }
+        }
+    });
 
     var tempChart = new Chart(tempCtx, {
         type: 'line',
@@ -186,6 +219,9 @@ window.onload = function () {
         }
     });
 
+    /*
+        Initialize socket.io link between client and back end
+    */
 
     var socket = io();
 
@@ -333,7 +369,6 @@ window.onload = function () {
             {
                 loadPower.style.color = "green";
             }
-
             if (data['powerSource'] === 1)
             {
                 sourcePower.style.color = "red";
@@ -625,6 +660,89 @@ window.onload = function () {
         }
     );
 
+    socket.on(
+        'current_coordinates',
+        function(data) {
+            place_marker(data['currentLatitude'], data['currentLongitude']);
+        }
+    );
+
+    socket.on(
+        'path-directions',
+        function(data) {
+
+            for (i = 0; i < data['points'].length; i++) {
+                place_breadcrumb(data['points'][i][0], data['points'][i][1]);
+            } 
+
+        }
+    );
+
+    socket.on(
+        'elevations',
+        function(data) {
+            //console.log("elevation data received");
+            updateElevationChart(data['elevations']);
+        }
+    );
+
+    socket.on(
+        'weather-forecast',
+        function(data) {
+
+            current_time.innerHTML = dateFormat(data['update_time']);
+            sunrise_time.innerHTML = dateFormat(data['sunrise_time']);
+            sunset_time.innerHTML = dateFormat(data['sunset_time']);
+        
+            fc_temp_0.innerHTML = Math.round(data['temperature'][0] * 100)/100;
+            fc_temp_3.innerHTML = Math.round(data['temperature'][1] * 100)/100;
+            fc_temp_6.innerHTML = Math.round(data['temperature'][2] * 100)/100;
+
+            fc_cloud_0.innerHTML = data['cloud_cover'][0];
+            fc_cloud_3.innerHTML = data['cloud_cover'][1];
+            fc_cloud_6.innerHTML = data['cloud_cover'][2];
+    
+            fc_wind_0.innerHTML = data['wind_speed'][0] + " , " + data['wind_direction'][0];
+            fc_wind_3.innerHTML = data['wind_speed'][1] + " , " + data['wind_direction'][1];
+            fc_wind_6.innerHTML = data['wind_speed'][2] + " , " + data['wind_direction'][2];
+
+            fc_desc_0.innerHTML = data['description'][0];
+            fc_desc_3.innerHTML = data['description'][1];
+            fc_desc_6.innerHTML = data['description'][2];
+
+        }
+    )
+
+    /*
+        Miscellaneous functions
+    */
+
+    function dateFormat(unix_time) {
+
+        var date = new Date(unix_time * 1000);
+        var hours = date.getHours();
+        var minutes = "0" + date.getMinutes();
+        var seconds = "0" + date.getSeconds();
+
+        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+        return formattedTime;
+
+    }
+
+    /*
+        Functions for handling charts
+    */
+
+    function updateElevationChart(elevations) {
+        for (i=0; i<elevations.length; i++) {
+            elevationChart.data.labels.push(i);
+            elevationChart.data.datasets[0].data.push(elevations[i]);
+        }
+
+        chart.update();
+    }
+
     function updateChart(chart, data, timeStamp, dataSet) {
         let sizeLabels = chart.data.labels.push(timeStamp);
         let sizeData = chart.data.datasets[dataSet].data.push(data);
@@ -662,6 +780,12 @@ window.onload = function () {
         return {data, timeStamp, valid};
     }
 
+
+    /*
+        TEMPORARY: Randomized Chart Data
+        TODO: Replace this
+    */
+
     var tempTimeCount = 0;
 
     setInterval(function() {
@@ -688,4 +812,7 @@ window.onload = function () {
 
         tempTimeCount += 0.5;
     }, 500);
+
 }
+
+
