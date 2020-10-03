@@ -1,6 +1,6 @@
 //jshint esversion:8
 
-const debug = require("debug")("app:")
+const debug = require("debug")("app:");
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -17,7 +17,7 @@ const port = process.env.PORT || 3000;
 
 // serve static files
 app.use(express.static(path.join(__dirname, '/client')));
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
@@ -87,7 +87,13 @@ app.post("/", async (req, res) => {
         io.emit('motor-temperature', data);
     }
 
-    res.status(200).send({message: "Received"});
+    Message.find(function (err, message) {
+        if (err) return debug(err);
+        debug(message);
+        console.log("=====");
+        console.log(message);
+    });
+    // res.status(200).send({message: "Received"});
 });
 
 module.exports = app;
