@@ -87,13 +87,13 @@ app.post("/", async (req, res) => {
         io.emit('motor-temperature', data);
     }
 
-    Message.find(function (err, message) {
-        if (err) return debug(err);
-        debug(message);
-        console.log("=====");
-        console.log(message);
-    });
-    // res.status(200).send({message: "Received"});
+    // Message.find(function (err, message) {
+    //     if (err) return debug(err);
+    //     debug(message);
+    //     console.log("=====");
+    //     console.log(message);
+    // });
+    res.status(200).send({message: "Received"});
 });
 
 module.exports = app;

@@ -1,3 +1,5 @@
+//jshint esversion:6
+
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -12,9 +14,8 @@ var parser = require('./CAN_Parser/CANparse');
 var port = process.env.PORT || 3000;
 
 server.listen(
-    port, 
-    function() 
-    {
+    port,
+    function () {
         console.log('server listening at port %d', port);
     }
 );
@@ -23,17 +24,16 @@ app.use(express.static(path.join(__dirname, '/client')));
 
 io.on(
     'connection',
-    async function(socket)
-    {
+    async function (socket) {
         io.emit('introduction');
         console.log("socket connection initialized");
 
         //UBC, Vancouver                                                         
-        var ubc_lat = 49.2606                                                       
-        var ubc_lng = -123.2460                                                     
+        var ubc_lat = 49.2606;
+        var ubc_lng = -123.2460;
 
         //University of Waterloo, Waterloo                                       
-        var uwaterloo_lat = 43.4723;                                                 
+        var uwaterloo_lat = 43.4723;
         var uwaterloo_lng = -80.5449;
 
         //SFU, Burnaby                                                           
@@ -45,20 +45,19 @@ io.on(
         elevation_points = result[1];
 
         result = await get_elevations(elevation_points_str, elevation_points);
-    
+
         result = await get_current_weather(ubc_lat, ubc_lng);
- 
+
     }
 );
 
-function get_current_weather(lat, lng)
-{
+function get_current_weather(lat, lng) {
 
     key = "51bb626fa632bcac20ccb67a2809a73b";
     url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat +
-         "&lon=" + lng + "&exclude=minutely,daily" + "&appid=" + key;
+        "&lon=" + lng + "&exclude=minutely,daily" + "&appid=" + key;
 
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
         https.get(url, (resp) => {
 
@@ -84,8 +83,8 @@ function get_current_weather(lat, lng)
                 wind_dir_fc = [];
                 desc_fc = [];
 
-                for (i=0; i<13; i=i+3) {
-                   
+                for (i = 0; i < 13; i = i + 3) {
+
                     temp_fc.push(response.hourly[i].temp - 273.15);
                     cloud_cover_fc.push(response.hourly[i].clouds);
                     wind_speed_fc.push(response.hourly[i].wind_speed);
@@ -94,36 +93,35 @@ function get_current_weather(lat, lng)
 
                 }
 
-            data = {};
-            data['update_time'] = current_time;
-            data['sunrise_time'] = sunrise_unix;
-            data['sunset_time'] = sunset_unix;
-            data['temperature'] = temp_fc;
-            data['cloud_cover'] = cloud_cover_fc;
-            data['wind_speed'] = wind_speed_fc;
-            data['wind_direction'] = wind_dir_fc;
-            data['description'] = desc_fc;
+                data = {};
+                data['update_time'] = current_time;
+                data['sunrise_time'] = sunrise_unix;
+                data['sunset_time'] = sunset_unix;
+                data['temperature'] = temp_fc;
+                data['cloud_cover'] = cloud_cover_fc;
+                data['wind_speed'] = wind_speed_fc;
+                data['wind_direction'] = wind_dir_fc;
+                data['description'] = desc_fc;
 
-            io.emit('weather-forecast', data);
-            
-            resolve(data);
+                io.emit('weather-forecast', data);
+
+                resolve(data);
 
             });
 
         }).on("error", (err) => {
-                console.log("Error: " + err.message)
-                reject(err.message);
-            });
+            console.log("Error: " + err.message);
+            reject(err.message);
+        });
     });
 }
 
 
-function get_elevations(elevation_points_str, elevation_points)
-{
+function get_elevations(elevation_points_str, elevation_points) {
 
     key = "AIzaSyCPgIT_5wtExgrIWN_Skl31yIg06XGtEHg";
-    url = "https://maps.googleapis.com/maps/api/elevation/json?locations=" 
-            + elevation_points_str + "&key=" + key;
+    url = "https://maps.googleapis.com/maps/api/elevation/json?locations=" +
+        elevation_points_str + "&key=" + key;
 
     return new Promise(
         (resolve, reject) => {
@@ -141,10 +139,10 @@ function get_elevations(elevation_points_str, elevation_points)
                 resp.on('end', () => {
 
                     response = JSON.parse(data).results;
-            
+
                     elevations = [];
 
-                    for (i=0; i<response.length; i++){
+                    for (i = 0; i < response.length; i++) {
                         elevations.push(response[i].elevation);
                     }
 
@@ -166,15 +164,14 @@ function get_elevations(elevation_points_str, elevation_points)
 }
 
 
-function get_directions(origin_lat, origin_lng, dest_lat, dest_lng)
-{
-   
-    key = "AIzaSyCPgIT_5wtExgrIWN_Skl31yIg06XGtEHg";
-    url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin_lat + 
-           "," + origin_lng + "&destination=" + dest_lat + "," + dest_lng + "&key=" + 
-           key;
+function get_directions(origin_lat, origin_lng, dest_lat, dest_lng) {
 
-    return new Promise( (resolve, reject) => {
+    key = "AIzaSyCPgIT_5wtExgrIWN_Skl31yIg06XGtEHg";
+    url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin_lat +
+        "," + origin_lng + "&destination=" + dest_lat + "," + dest_lng + "&key=" +
+        key;
+
+    return new Promise((resolve, reject) => {
 
         https.get(url, (resp) => {
 
@@ -189,14 +186,14 @@ function get_directions(origin_lat, origin_lng, dest_lat, dest_lng)
             resp.on('end', () => {
 
                 response = JSON.parse(data);
-         
+
                 route_steps = response.routes[0].legs[0].steps
-        
+
                 route_instructions = [];
                 polyline_points = [];
                 elevation_points = [];
                 elevation_points_str = '';
-        
+
                 for (i = 0; i < route_steps.length; i++) {
 
                     route_instructions.push(route_steps[i].html_instructions);
@@ -207,15 +204,15 @@ function get_directions(origin_lat, origin_lng, dest_lat, dest_lng)
                     for (j = 0; j < temp.length; j = j + 5) {
                         polyline_points.push(temp[j]);
                     }
-                polyline_points.push(temp[temp.length - 1]);
+                    polyline_points.push(temp[temp.length - 1]);
 
                 }
 
-                for (i = 0; i < polyline_points.length; i=i+5) {
+                for (i = 0; i < polyline_points.length; i = i + 5) {
                     elevation_points.push(polyline_points[i]);
-                    elevation_points_str = elevation_points_str.concat(polyline_points[i][0] + "," + polyline_points[i][1] + "|"); 
+                    elevation_points_str = elevation_points_str.concat(polyline_points[i][0] + "," + polyline_points[i][1] + "|");
                 }
-                elevation_points_str = elevation_points_str.slice(0, elevation_points_str.length-1);
+                elevation_points_str = elevation_points_str.slice(0, elevation_points_str.length - 1);
 
                 data = {};
                 data['points'] = polyline_points;
@@ -236,78 +233,62 @@ function get_directions(origin_lat, origin_lng, dest_lat, dest_lng)
 
 http.createServer(
     (request, response) => {
-        const { headers, method, url } = request;
+        const {
+            headers,
+            method,
+            url
+        } = request;
         let body = [];
         request.on(
-            'error', 
+            'error',
             (err) => {
                 console.error(err);
             }
         ).on(
-            'data', 
+            'data',
             (chunk) => {
                 body.push(chunk);
             }
         ).on(
-            'end', 
+            'end',
             () => {
 
                 body = Buffer.concat(body).toString();
                 body = JSON.parse(body);
-                
+
                 response.on(
-                    'error', 
+                    'error',
                     (err) => {
                         console.error(err);
                     }
                 );
-                
+
                 var data = parser.canParser(body);
 
-                if (data['ID'] === 0x622)
-                {
+                if (data['ID'] === 0x622) {
                     io.emit('battery-faults', data);
-                }
-                else if (data['ID'] === 0x623)
-                {
+                } else if (data['ID'] === 0x623) {
                     io.emit('battery-voltage', data);
-                }
-                else if (data['ID'] === 0x624)
-                {
+                } else if (data['ID'] === 0x624) {
                     io.emit('battery-current', data);
-                }
-                else if (data['ID'] === 0x626)
-                {
+                } else if (data['ID'] === 0x626) {
                     io.emit('battery-soc', data);
-                }
-                else if (data['ID'] === 0x627)
-                {
+                } else if (data['ID'] === 0x627) {
                     io.emit('battery-temperature', data)
-                }
-                else if (data['ID'] === 0x401)
-                {
+                } else if (data['ID'] === 0x401) {
                     io.emit('motor-faults', data)
-                }
-                else if (data['ID'] === 0x402)
-                {
+                } else if (data['ID'] === 0x402) {
                     io.emit('motor-power', data);
-                }
-                else if (data['ID'] === 0x403)
-                {
+                } else if (data['ID'] === 0x403) {
                     io.emit('motor-velocity', data);
-                }
-                else if (data['ID'] === 0x40B)
-                {
+                } else if (data['ID'] === 0x40B) {
                     io.emit('motor-temperature', data);
-                }
-                else if (data['ID'] === 0x800)
-                {
+                } else if (data['ID'] === 0x800) {
                     io.emit('current_coordinates', data);
                 }
 
                 response.statusCode = 200;
                 response.end();
-
             }
         );
     }

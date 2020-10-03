@@ -63,6 +63,8 @@ window.onload = function () {
     var tempCtx = $('tempChart').getContext('2d');
     var vAndACtx = $('vAndAChart').getContext('2d');
 
+    // var mapTab = $('map-tab');
+
     var elevationChart = new Chart(elevationCtx, {
         type: 'line',
         data: {
@@ -812,6 +814,7 @@ window.onload = function () {
 
         tempTimeCount += 0.5;
     }, 500);
+
 
 }
 

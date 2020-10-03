@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.5",
     "path": "^0.12.7",
+    "polyline-encoded": "0.0.9",
     "socket.io": "^2.3.0"
   },
   "engines": {
