@@ -665,21 +665,21 @@ window.onload = function () {
     var tempTimeCount = 0;
 
     setInterval(function() {
-        let data = Math.floor(Math.random() * 100) + 1
+        let data = Math.floor(Math.random() * 100) + 1;
         let chartData = getData(data, tempTimeCount);
 
         if (chartData.valid) {
             updateChart(tempChart, chartData.data, chartData.timeStamp, 0);
         }
 
-        let data2 = Math.floor(Math.random() * 120) + 1
+        let data2 = Math.floor(Math.random() * 120) + 1;
         let chartData2 = getData(data2, tempTimeCount);
 
         if (chartData2.valid) {
             updateChart(vAndAChart, chartData2.data, chartData2.timeStamp, 0);
         }
 
-        let data3 = Math.floor(Math.random() * 60) + 1
+        let data3 = Math.floor(Math.random() * 60) + 1;
         let chartData3 = getData(data3, tempTimeCount);
 
         if (chartData3.valid) {
