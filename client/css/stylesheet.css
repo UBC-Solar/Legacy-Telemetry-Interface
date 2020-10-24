@@ -212,18 +212,21 @@ td {
 
 /* Style tab links */
 
-#tab-bar {
-    /* background-color:#2a2a45; */
+#tabs {
     position: fixed;
     width: 33%;
     left: 67.5%;
     height: 10%;
-
     border-radius: 25%;
+    display: row;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .tablink {
     background-color: #E75A7C;
+    cursor: pointer;
     text-align: center;
     border: none;
     outline: none;
@@ -234,8 +237,8 @@ td {
     font-size: 2vmin;
     width: 31%;
     height: 105%;
-
     border-radius: 2vw;
+    transition-duration: .3s;
 }
 
 .tablink:hover {
@@ -319,6 +322,8 @@ td {
     padding: 1%;
 }
 
+
+
 /* Making this stuff responsive for smaller screen sizes */
 @media only screen and (max-width: 800px) {
     #Titlebar {
@@ -355,7 +360,7 @@ td {
         position: relative !important;
     }
 
-    #tab-bar {
+    #tabs {
         width: 96% !important;
         float: top !important;
         left: 5% !important;

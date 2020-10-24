@@ -62,6 +62,9 @@ window.onload = function () {
 
     var tempCtx = $('tempChart').getContext('2d');
     var vAndACtx = $('vAndAChart').getContext('2d');
+    var elevationCtx = $('elevationChart').getContext('2d');
+
+    var current_time = $('current_time');
 
     // var mapTab = $('map-tab');
 
@@ -742,7 +745,7 @@ window.onload = function () {
             elevationChart.data.datasets[0].data.push(elevations[i]);
         }
 
-        chart.update();
+        elevationChart.update();
     }
 
     function updateChart(chart, data, timeStamp, dataSet) {

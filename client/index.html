@@ -3,20 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/history.css">
     <title>Telemetry</title>
 </head>
 </head>
 
 <body>
-
     <!-- Titlebaar contains the title of the webapp -->
     <div id="Titlebar">
         <img src="img/logo.png" alt="UBC Solar Logo" id="Titlebar-Emblem-SolarLogo">
 
         <table id="Titlebar-table">
             <tr>
-                <td><h2 class="Titlebar-mainheader">Telemetry Interface for Daybreak</h2></td>
+                <td>
+                    <h2 class="Titlebar-mainheader">Telemetry Interface for Daybreak</h2>
+                </td>
             </tr>
         </table>
     </div>
@@ -32,7 +36,7 @@
         </div>
 
         <!-- Communications status -->
-        
+
         <div id="SideNav-Communications">
             <h3 class="SideNav-header"> Communciations</h3>
             <table class="SideNav-table">
@@ -58,7 +62,7 @@
                 </tr>
             </table>
         </div>
-        
+
 
         <!-- Summary of battery status -->
         <div id="SideNav-BatterySummary">
@@ -83,7 +87,7 @@
                     <td>Pack Current</td>
                     <td id="batt-current">000.0</td>
                     <td>A</td>
-                </tr>  
+                </tr>
                 <tr>
                     <td>Max. Temperature</td>
                     <td id="batt-max-temp">000.0</td>
@@ -184,8 +188,8 @@
         </div>
 
         <div id="GraphNav-Temp">
-            <h5> Temperature time-series</h5>       
-            <canvas id="tempChart" width="100%" height="50%"></canvas>     
+            <h5> Temperature time-series</h5>
+            <canvas id="tempChart" width="100%" height="50%"></canvas>
         </div>
 
         <div id="GraphNav-Speed">
@@ -198,11 +202,17 @@
 
     <!-- Tabs -->
     <script type="text/javascript" src="js/tabs.js"></script>
-    <div id="tab-bar">
-        
-        <button class="tablink" onclick="openPage('Faults', this, '#A3C4BC')" id="defaultOpen"><h3>Other Faults</h3></button>
-        <button class="tablink" onclick="openPage('Maps', this, '#A3C4BC')" id="map-tab"><h3>Maps</h3></button>
-        <button class="tablink" onclick="openPage('Simulation', this, '#A3C4BC')" id="simulation-tab"><h3>Simulation</h3></button>
+    <div id="tabs">
+
+        <button class="tablink" onclick="openPage('Faults', this, '#A3C4BC')" id="defaultOpen">
+            <h3>Other Faults</h3>
+        </button>
+        <button class="tablink" onclick="openPage('Maps', this, '#A3C4BC')" id="map-tab">
+            <h3>Maps</h3>
+        </button>
+        <button class="tablink" onclick="openPage('History', this, '#A3C4BC')" id="history-tab">
+            <h3>History</h3>
+        </button>
     </div>
 
     <!-- Battery Tab -->
@@ -211,7 +221,7 @@
         <!-- BMS State -->
         <div id="Faults-bmsState">
             <h3 class="Faults-header">BMS State</h3>
-            <table class = "tab-table">
+            <table class="tab-table">
                 <tr>
                     <td id="relay-fault">Relay Fault</td>
                     <td id="k3-contactor">K3 Contactor On</td>
@@ -280,23 +290,24 @@
                 </tr>
             </table>
         </div>
-        
+
     </div>
 
     <div id="Maps" class="tabcontent">
 
         <!--Weather at current location and time-->
-        
+
 
         <!--Spatial Map with Location-->
-        <div id="googleMap" style="width:100%;height:40%"></div> 
+        <div id="googleMap" style="width:100%;height:40%"></div>
 
         <!-- Google Maps API: replace KEY_HERE with your API keys                    -->
         <!-- https://developers.google.com/maps/documentation/javascript/get-api-key -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPgIT_5wtExgrIWN_Skl31yIg06XGtEHg&callback=myMap" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPgIT_5wtExgrIWN_Skl31yIg06XGtEHg&callback=myMap"
+            async defer></script>
 
         <!--Elevation Map with Location-->
-        <canvas id="elevationChart" width="100%" height="40%"></canvas> 
+        <canvas id="elevationChart" width="100%" height="40%"></canvas>
 
         <table width="100%">
             <tr>
@@ -323,41 +334,65 @@
             </tr>
             <tr>
                 <td>+0</td>
-                <td id = "temp-0"> - </td>
-                <td id = "cloud-0"> - </td>
-                <td id = "wind-0"> - </td>
-                <td id = "desc-0"> - </td>
+                <td id="temp-0"> - </td>
+                <td id="cloud-0"> - </td>
+                <td id="wind-0"> - </td>
+                <td id="desc-0"> - </td>
             </tr>
             <tr>
                 <td>+3</td>
-                <td id = "temp-3"> - </td>
-                <td id = "cloud-3"> - </td>
-                <td id = "wind-3"> - </td>
-                <td id = "desc-3"> - </td>
+                <td id="temp-3"> - </td>
+                <td id="cloud-3"> - </td>
+                <td id="wind-3"> - </td>
+                <td id="desc-3"> - </td>
             </tr>
             <tr>
                 <td>+6</td>
-                <td id = "temp-6"> - </td>
-                <td id = "cloud-6"> - </td>
-                <td id = "wind-6"> - </td>
-                <td id = "desc-6"> - </td>
+                <td id="temp-6"> - </td>
+                <td id="cloud-6"> - </td>
+                <td id="wind-6"> - </td>
+                <td id="desc-6"> - </td>
             </tr>
         </table>
 
     </div>
 
-    <div id="Simulation" class="tabcontent">
-
-        <p>Simulations and the result of data models go here</p>
+    <div id="History" class="tabcontent">
+        <div class="container">
+            <p>Fetch the history data</p>
+        <form>
+            <div class="form-group">
+                <label for="data-name">Data Name:  </label>
+                <select id="data-name" name="data-name">
+                    <option value="battery-faults">Battery Faults</option>
+                    <option value="battery-voltage">Battery Voltage</option>
+                    <option value="battery-current">Battery Current</option>
+                    <option value="battery-soc">Battery Soc</option>
+                    <option value="battery-temperature">Battery Temperature</option>
+                    <option value="motor-faults">Motor Faults</option>
+                    <option value="motor-power">Motor Power</option>
+                    <option value="motor-velocity">Motor Velocity</option>
+                    <option value="motor-temperature">Motor Temperature</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="time-stamp">Time Stamp:</label>
+                <input id="time-stamp" type="number" name="time-stamp">
+            </div>
+            <button class="btn">Go Fetch</button>
+        </form>
+        </div>
+        
 
     </div>
 
+    <script src="js/history.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
     <script src="js/tabs.js"></script>
-
+    
 </body>
 
 </html>

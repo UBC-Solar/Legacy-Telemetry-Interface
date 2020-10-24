@@ -1,0 +1,40 @@
+#History .container  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* #History p {
+    margin: 0 15%;
+} */
+
+.form-group {
+    margin: 8px 0;
+    width: 100%;
+}
+
+
+#data-name, #time-stamp {
+    border: 0;
+    outline-style: none;
+}
+
+.btn {
+    border: 0;
+    margin: 0 30%;
+    outline-style: none;
+    text-align: center;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: aqua;
+    cursor: pointer;
+    opacity: .3;
+    transition-duration: .5s;
+}
+
+.btn:hover {
+    opacity: 1;
+}
