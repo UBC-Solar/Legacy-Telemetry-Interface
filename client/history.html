@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/history.css">
+    <title>Data History</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">History Page</h1>
+        <h2>Time: <span id="timestamp">-</span></h2>
+
+        <div class="battery-faults data-card large">
+            <h3 class="card-title">Battery Faults</h3>
+
+            <h4>BMS State</h4>
+            <div class="card-info bms-state">
+                
+                <span class="relay-fault">Relay Fault</span>
+                <span class="k1">K3 Contactor On</span>
+                <span class="k2">K2 Contactor On</span>
+                <span class="k3">K1 Contactor On</span>
+                <span class="fault-state">Fault State</span>
+            </div>
+
+            <h4>Battery Warning</h4>
+            <div class="card-info battery-warning">
+                <span class="iso-fault">Isolation Fault</span>
+                <span class="low-SOH">Low SOH</span>
+                <span class="hot-temp">Hot Temperature</span>
+                <span class="cold-temp">Cold Temperature</span>
+                <span class="high-vol">High Voltage</span>
+                <span class="low-vol">Low Voltage</span>
+            </div>
+
+            <h4>Battery Fault</h4>
+            <div class="card-info battery-faults">
+
+                <span class="fan-on">Fan On</span>
+                <span class="LLIM">LLIM Set</span>
+                <span class="HLIM">HLIM Set</span>
+                <span class="CAN-req">CAN Contactor Request</span>
+                <span class="hardwire-req">Hardwire Contactor Request</span>
+                <span class="interlock-tripped">Interlock Tripped</span>
+                <span class="power-from-load">Power From Load</span>
+                <span class="power-from-source">Power Source</span>
+                <span class="battery-low">Battery Low</span>
+                <span class="battery-full">Battery Full</span>
+                <span class="comm-fault">Comm. Fault</span>
+                <span class="charge-over-current">Charge Over-current</span>
+                <span class="discharge-over-current">Discharge Over-current</span>
+                <span class="over-temp">Over Temperature</span>
+                <span class="under-vol">Under Voltage</span>
+                <span class="over-vol">Over Voltage</span>
+                <span class="general-fault">General Fault</span>
+            </div>               
+        </div>
+
+        <div class="motor-faults data-card large">
+            <h3 class="card-title">Motor Faults</h3>
+            <div class="card-info motor-warning">
+                <span class="vol-lock-out">Voltage Lock-out</span>
+                <span class="config-error">Configuration Error</span>
+                <span class="watchdog-rst">Watchdog Reset</span>
+                <span class="DC-over-vol">DC Over-Voltage</span>
+                <span class="sft-over-current">Software Over-Current</span>
+                <span class="hrd-over-current">Hardware Over-Current</span>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="battery-voltage data-card">
+                <h3 class="card-title">Battery Voltage</h3>
+                <div class="card-info">
+                    <div>
+                        <label for="battery-vol">Battery Voltage: </label>
+                        <span id="battery-vol">-</span>
+                    </div>
+                    <div>
+                        <label for="max-cell-vol">Max Battery Cell Voltage: </label>
+                        <span id="max-cell-vol">-</span>
+                    </div>
+                    <div>
+                        <label for="min-cell-vol">Min Battery Cell Voltage: </label>
+                        <span id="min-cell-vol">-</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="battery-temperature data-card">
+                <h3 class="card-title">Battery Temperature</h3>
+                <div class="card-info">
+                    <div>
+                        <label for="batt-max-temp">Max Temperature: </label>
+                        <span id="batt-max-temp">-</span>
+                    </div>
+                    <div>
+                        <label for="batt-min-temp">Min Temperature: </label>
+                        <span id="batt-min-temp">-</span>
+                    </div>
+                    <div>
+                        <label for="batt-ave-temp">Ave Temperature: </label>
+                        <span id="batt-ave-temp">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="motor-temperature data-card">
+                <h3 class="card-title">Motor Temperature</h3>
+                <div class="card-info">
+                    <div>
+                        <label for="motor-temp">Motor Temperature: </label>
+                        <span id="motor-temp">-</span>
+                    </div>
+                    <div>
+                        <label for="motor-control-temp">Motor Controller Temperature: </label>
+                        <span id="motor-control-temp">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="card-grid">
+            <div class="battery-current data-card">
+                <h3 class="card-title">Battery Current</h3>
+                <div class="card-info">
+                    <div>
+                        <label for="batt-current">Battery Current: </label>
+                        <span id="batt-current">-</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="motor-power data-card">
+                <h3 class="card-title">Motor Power</h3>
+                <div class="card-info">
+                    <div>
+                        <label for="motor-current">Motor Current: </label>
+                        <span id="motor-current">-</span>
+                    </div>
+                    <div>
+                        <label for="motor-vol">Motor Voltage: </label>
+                        <span id="motor-vol">-</span>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="motor-velocity data-card">
+                <h3 class="card-title">Motor Velocity</h3>
+                <div class="card-info">
+                    <div>
+                        <label for="motor-velocity">Motor Velocity: </label>
+                        <span id="motor-velocity">-</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="battery-soc data-card">
+                <h3 class="card-title">Battery Temperature</h3>
+                <div class="card-info">
+                    <div>
+                        <label for="batt-soc">State Of Charge: </label>
+                        <span id="batt-soc">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/history.js"></script>
+</html>

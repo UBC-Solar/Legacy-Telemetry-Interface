@@ -6,7 +6,6 @@
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="css/stylesheet.css">
-    <link rel="stylesheet" href="css/history.css">
     <title>Telemetry</title>
 </head>
 </head>
@@ -311,7 +310,7 @@
 
         <table width="100%">
             <tr>
-                <td>Time:</td>
+                <td>Current Time:</td>
                 <td id="current-time">-</td>
             </tr>
             <tr>
@@ -360,10 +359,11 @@
     <div id="History" class="tabcontent">
         <div class="container">
             <p>Fetch the history data</p>
-        <form>
+        <form  action="/history" method="post">
             <div class="form-group">
                 <label for="data-name">Data Name:  </label>
-                <select id="data-name" name="data-name">
+                <select id="data-name" name="dataName">
+                    <option value="All">All</option>
                     <option value="battery-faults">Battery Faults</option>
                     <option value="battery-voltage">Battery Voltage</option>
                     <option value="battery-current">Battery Current</option>
@@ -377,16 +377,15 @@
             </div>
             <div class="form-group">
                 <label for="time-stamp">Time Stamp:</label>
-                <input id="time-stamp" type="number" name="time-stamp">
+                <input id="time-stamp" type="number" name="timeStamp">
             </div>
-            <button class="btn">Go Fetch</button>
+            <button type="submit" class="btn">Go Fetch</button>
         </form>
         </div>
         
 
     </div>
 
-    <script src="js/history.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>

@@ -17,6 +17,7 @@ const mongoose = require("mongoose");
 const debug = require("debug")("app:");
 const Message = require('./models/message');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true})); 
 
 mongoose.connect("mongodb://localhost:27017/ubc-solar-telemetry-interface", {
         useNewUrlParser: true,
@@ -39,19 +40,57 @@ server.listen(
 app.use(express.static(path.join(__dirname, '/client'))); 
 
 // ========================== from app.js
+app.get('/history', (req, res) => {
+    res.sendFile(__dirname + '/client/history.html');
+    // res.send("History page :)" );
+});
+
+app.post("/history", (req, res)=> {
+    const dataName = req.body.dataName;
+    const time = req.body.timeStamp;
+    
+    if (dataName === "All") {
+        Message.find({timestamp: time}, (err, msgs) => {
+            if (msgs == null || err) {
+                debug("Error querying database", err);
+                res.send("No data found :(" );
+            } else {
+                console.log(msgs);
+                res.sendFile(__dirname + '/client/history.html');
+                msgs.forEach(msg => {
+                    const data = parser.canParser(msg);
+                    renderData(data);
+                });
+            }
+        });
+    } else {
+        var data_id = parseDataID(dataName);
+        Message.findOne({timestamp: time, id: data_id}, (err, msg) => {
+            if (msg == null || err) {
+                debug("Error querying database", err);
+                res.send("No data found :(" );
+            } else {
+                console.log(msg);
+                res.sendFile(__dirname + '/client/history.html');
+                const data = parser.canParser(msg);
+                console.log(data);
+                renderData(data);
+            }
+        });
+    }
+});
+
 app.post("/", async (req, res) => {
     res.on('error', (err) => {
         debug(err);
     });
-
-    var newData = req.body['data'];
     
     // check if the post request is a CAN message.
     // create mongoose Model
     message = new Message({
-        id: req.body['id'],
-        data: newData,
-        timestamp: req.body['timestamp']
+        id: req.body.id,
+        data: req.body.data,
+        timestamp: req.body.timestamp
     });
 
     // save 'message' in the data base
@@ -70,32 +109,85 @@ app.post("/", async (req, res) => {
 
     const data = parser.canParser(req.body);
 
-    if (data['ID'] === 0x622) {
+    emitData(data);
+
+    // res.status(200).send({
+    //     message: "Received"
+    // });
+});
+
+function emitData(data) {
+    if (data.ID === 0x622) {
         io.emit('battery-faults', data);
-    } else if (data['ID'] === 0x623) {
+    } else if (data.ID === 0x623) {
         io.emit('battery-voltage', data);
-    } else if (data['ID'] === 0x624) {
+    } else if (data.ID === 0x624) {
         io.emit('battery-current', data);
-    } else if (data['ID'] === 0x626) {
+    } else if (data.ID === 0x626) {
         io.emit('battery-soc', data);
-    } else if (data['ID'] === 0x627) {
+    } else if (data.ID === 0x627) {
         io.emit('battery-temperature', data);
-    } else if (data['ID'] === 0x401) {
+    } else if (data.ID === 0x401) {
         io.emit('motor-faults', data);
-    } else if (data['ID'] === 0x402) {
+    } else if (data.ID === 0x402) {
         io.emit('motor-power', data);
-    } else if (data['ID'] === 0x403) {
+    } else if (data.ID === 0x403) {
         io.emit('motor-velocity', data);
-    } else if (data['ID'] === 0x40B) {
+    } else if (data.ID === 0x40B) {
         io.emit('motor-temperature', data);
-    } else if (data['ID'] === 0x800) {
+    } else if (data.ID === 0x800) {
         io.emit('current_coordinates', data);
     }
+}
 
-    res.status(200).send({
-        message: "Received"
-    });
-});
+function renderData(data) {
+    if (data.ID === 0x622) {
+        io.emit('battery-faults-history', data);
+    } else if (data.ID === 0x623) {
+        io.emit('battery-voltage-history', data);
+    } else if (data.ID === 0x624) {
+        io.emit('battery-current-history', data);
+    } else if (data.ID === 0x626) {
+        io.emit('battery-soc-history', data);
+    } else if (data.ID === 0x627) {
+        io.emit('battery-temperature-history', data);
+        console.log("rendering");
+    } else if (data.ID === 0x401) {
+        io.emit('motor-faults-history', data);
+    } else if (data.ID === 0x402) {
+        io.emit('motor-power-history', data);
+    } else if (data.ID === 0x403) {
+        io.emit('motor-velocity-history', data);
+    } else if (data.ID === 0x40B) {
+        io.emit('motor-temperature-history', data);
+    } else if (data.ID === 0x800) {
+        io.emit('current-coordinates-history', data);
+    }
+}
+
+function parseDataID(dataName) {
+    var data_id;
+    if (dataName === "battery-faults") {
+        data_id = 0x622;
+    } else if (dataName === "battery-voltage") {
+        data_id = 0x623;
+    } else if (dataName === "battery-current") {
+        data_id = 0x624;
+    } else if (dataName === "battery-soc") {
+        data_id = 0x626;
+    } else if (dataName === "battery-temperature") {
+        data_id = 0x627;
+    } else if (dataName === "motor-faults") {
+        data_id = 0x401;
+    } else if (dataName === "motor-power") {
+        data_id = 0x402;
+    } else if (dataName === "motor-velocity") {
+        data_id = 0x403;
+    } else if (dataName === "motor-temperature") {
+        data_id = 0x40B;
+    }
+    return data_id;
+}
 
 // ==========================
 
@@ -343,28 +435,7 @@ http.createServer(
 
                 var data = parser.canParser(body);
 
-                if (data['ID'] === 0x622) {
-                    io.emit('battery-faults', data);
-                } else if (data['ID'] === 0x623) {
-                    io.emit('battery-voltage', data);
-                } else if (data['ID'] === 0x624) {
-                    io.emit('battery-current', data);
-                } else if (data['ID'] === 0x626) {
-                    io.emit('battery-soc', data);
-                } else if (data['ID'] === 0x627) {
-                    io.emit('battery-temperature', data)
-                } else if (data['ID'] === 0x401) {
-                    io.emit('motor-faults', data)
-                } else if (data['ID'] === 0x402) {
-                    io.emit('motor-power', data);
-                } else if (data['ID'] === 0x403) {
-                    io.emit('motor-velocity', data);
-                } else if (data['ID'] === 0x40B) {
-                    io.emit('motor-temperature', data);
-                } else if (data['ID'] === 0x800) {
-                    io.emit('current_coordinates', data);
-                }
-
+                emitData(data);
                 response.statusCode = 200;
                 response.end();
             }

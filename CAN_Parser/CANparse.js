@@ -1,7 +1,7 @@
 exports.canParser = function parseRaw(receive) {
-    var id = receive["id"];
-    var message = receive["data"];
-    var milli = receive["timestamp"];
+    var id = receive.id;
+    var message = receive.data;
+    var milli = receive.timestamp;
 
     //Msg 0x622, Battery Faults + Warnings
     if (id == 0x622) {

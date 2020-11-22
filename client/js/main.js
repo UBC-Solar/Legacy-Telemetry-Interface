@@ -1,70 +1,90 @@
+//jshint esversion:6
+
 window.onload = function () {
     const $ = document.getElementById.bind(document);
-    var serverStatus = $('server-status');
-    var lastTimestamp = $('last-timestamp');
-    var lastID = $('last-id');
+    const serverStatus = $('server-status');
+    const lastTimestamp = $('last-timestamp');
+    const lastID = $('last-id');
 
-    var battVoltage = $('batt-voltage');
-    var battMinCellVoltage = $('batt-min-cell-voltage');
-    var battMaxCellVoltage = $('batt-max-cell-voltage');
-    var battCurrent = $('batt-current');
-    var battMaxTemp = $('batt-max-temp');
-    var battMinTemp = $('batt-min-temp');
-    var battAveTemp = $('batt-ave-temp');
-    var battSOC = $('batt-soc');
+    const battVoltage = $('batt-voltage');
+    const battMinCellVoltage = $('batt-min-cell-voltage');
+    const battMaxCellVoltage = $('batt-max-cell-voltage');
+    const battCurrent = $('batt-current');
+    const battMaxTemp = $('batt-max-temp');
+    const battMinTemp = $('batt-min-temp');
+    const battAveTemp = $('batt-ave-temp');
+    const battSOC = $('batt-soc');
 
-    var motorVelocity = $('motor-velocity');
-    var motorTemp = $('motor-temp');
-    var mcTemp = $('mc-temp');
-    var motorCurrent = $('motor-current');
-    var motorVoltage = $('motor-voltage');
+    const motorVelocity = $('motor-velocity');
+    const motorTemp = $('motor-temp');
+    const mcTemp = $('mc-temp');
+    const motorCurrent = $('motor-current');
+    const motorVoltage = $('motor-voltage');
 
-    var batteryLow = $('battery-low');
-    var batteryFull = $('battery-full');
-    var batteryCommFault = $('comm-fault');
+    const batteryLow = $('battery-low');
+    const batteryFull = $('battery-full');
+    const batteryCommFault = $('comm-fault');
+    const chargeOC = $('chg-overcurrent');
+    const dischargeOC = $('dchg-overcurrent');
+    const overTemp = $('overtemp');
 
-    var chargeOC = $('chg-overcurrent');
-    var dischargeOC = $('dchg-overcurrent');
-    var overTemp = $('overtemp');
+    const undervoltage = $('undervoltage');
+    const overvoltage = $('overvoltage');
+    const generalFault = $('general-fault');
 
-    var undervoltage = $('undervoltage');
-    var overvoltage = $('overvoltage');
-    var generalFault = $('general-fault');
+    const relayFault = $('relay-fault');
+    const k3Contactor = $('k3-contactor');
+    const k2Contactor = $('k2-contactor');
+    const k1Contactor = $('k1-contactor');
+    const faultState = $('fault-state');
 
-    var relayFault = $('relay-fault');
-    var k3Contactor = $('k3-contactor');
-    var k2Contactor = $('k2-contactor');
-    var k1Contactor = $('k1-contactor');
-    var faultState = $('fault-state');
+    const fanOn = $('fan-on');
+    const llimSet = $('llim-set');
+    const hlimSet = $('hlim-set');
+    const canContactor = $('can-contactor');
+    const hardwireContactor = $('hardwire-contactor');
+    const interlockTripped = $('interlock-tripped');
+    const loadPower = $('load-power');
+    const sourcePower = $('source-power');
 
-    var fanOn = $('fan-on');
-    var llimSet = $('llim-set');
-    var hlimSet = $('hlim-set');
-    var canContactor = $('can-contactor');
-    var hardwireContactor = $('hardwire-contactor');
-    var interlockTripped = $('interlock-tripped');
-    var loadPower = $('load-power');
-    var sourcePower = $('source-power');
+    const isolationFault = $('isolation-fault');
+    const lowSOH = $('low-soh');
+    const hotTemp = $('hot-temp');
+    const coldTemp = $('cold-temp');
+    const highVoltage = $('high-voltage');
+    const lowVoltage = $('low-voltage');
 
-    var isolationFault = $('isolation-fault');
-    var lowSOH = $('low-soh');
-    var hotTemp = $('hot-temp');
-    var coldTemp = $('cold-temp');
-    var highVoltage = $('high-voltage');
-    var lowVoltage = $('low-voltage');
+    const voltageLockout = $('voltage-lockout');
+    const configError = $('config-error');
+    const watchdogReset = $('watchdog-reset');
+    const dcOV = $('dc-overvoltage');
+    const softwareOC = $('software-overcurrent');
+    const hardwareOC = $('hardware-overcurrent');
 
-    var voltageLockout = $('voltage-lockout');
-    var configError = $('config-error');
-    var watchdogReset = $('watchdog-reset');
-    var dcOV = $('dc-overvoltage');
-    var softwareOC = $('software-overcurrent');
-    var hardwareOC = $('hardware-overcurrent');
+    const tempCtx = $('tempChart').getContext('2d');
+    const vAndACtx = $('vAndAChart').getContext('2d');
+    const elevationCtx = $('elevationChart').getContext('2d');
 
-    var tempCtx = $('tempChart').getContext('2d');
-    var vAndACtx = $('vAndAChart').getContext('2d');
-    var elevationCtx = $('elevationChart').getContext('2d');
+    const current_time = $('current-time');
+    const sunrise_time = $('sunrise-time');
+    const sunset_time = $('sunset-time');
 
-    var current_time = $('current_time');
+    const fc_temp_0 = $('temp-0');
+    const fc_temp_3 = $('temp-3');
+    const fc_temp_6 = $('temp-6');
+
+    const fc_cloud_0 = $('cloud-0');
+    const fc_cloud_3 = $('cloud-3');
+    const fc_cloud_6 = $('cloud-6');
+
+    const fc_wind_0 = $('wind-0');
+    const fc_wind_3 = $('wind-3');
+    const fc_wind_6 = $('wind-6');
+
+    const fc_desc_0 = $('desc-0');
+    const fc_desc_3 = $('desc-3');
+    const fc_desc_6 = $('desc-6');
+
 
     // var mapTab = $('map-tab');
 
@@ -145,7 +165,7 @@ window.onload = function () {
             }
         }
 
-        
+
     });
 
     var vAndAChart = new Chart(vAndACtx, {
@@ -230,6 +250,7 @@ window.onload = function () {
 
     var socket = io();
 
+
     socket.on(
         'introduction',
         function (data) {
@@ -247,13 +268,13 @@ window.onload = function () {
             battMaxTemp.innerHTML = data['maxTemp'];
             battMinTemp.innerHTML = data['minTemp'];
             battAveTemp.innerHTML = data['temperature'];
-            
+
             let chartData = getData(data['temperature'], data['timeStamp']);
 
             if (chartData.valid) {
                 updateChart(tempChart, chartData.data, chartData.timeStamp, 0);
             }
-            
+
         }
 
     );
@@ -264,260 +285,176 @@ window.onload = function () {
 
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
-            
-            if (data['relayFault'] === 1)
-            {
+
+            if (data['relayFault'] === 1) {
                 relayFault.style.color = "red";
-            }
-            else
-            {
+            } else {
                 relayFault.style.color = "green";
             }
 
-            if (data['K3'] === 1)
-            {
+            if (data['K3'] === 1) {
                 k3Contactor.style.color = "red";
-            }
-            else
-            {
+            } else {
                 k3Contactor.style.color = "green";
             }
 
-            if (data['K2'] === 1)
-            {
+            if (data['K2'] === 1) {
                 k2Contactor.style.color = "red";
-            }
-            else
-            {
+            } else {
                 k2Contactor.style.color = "green";
             }
 
-            if (data['K1'] === 1)
-            {
+            if (data['K1'] === 1) {
                 k1Contactor.style.color = "red";
-            }
-            else
-            {
+            } else {
                 k1Contactor.style.color = "green";
             }
 
-            if (data['faultState'] === 1)
-            {
+            if (data['faultState'] === 1) {
                 faultState.style.color = "red";
                 generalFault.style.color = "red";
-            }
-            else
-            {
+            } else {
                 faultState.style.color = "green";
                 generalFault.style.color = "green";
             }
 
-            if (data['fanOn'] === 1)
-            {
+            if (data['fanOn'] === 1) {
                 fanOn.style.color = "red";
-            }
-            else
-            {
+            } else {
                 fanOn.style.color = "green";
             }
 
-            if (data['LLIM'] === 1)
-            {
+            if (data['LLIM'] === 1) {
                 llimSet.style.color = "red";
-            }
-            else
-            {
+            } else {
                 llimSet.style.color = "green";
             }
 
-            if (data['HLIM'] === 1)
-            {
+            if (data['HLIM'] === 1) {
                 hlimSet.style.color = "red";
-            }
-            else
-            {
+            } else {
                 hlimSet.style.color = "green";
             }
 
-            if (data['CANrequest'] === 1)
-            {
+            if (data['CANrequest'] === 1) {
                 canContactor.style.color = "red";
-            }
-            else
-            {
+            } else {
                 canContactor.style.color = "green";
             }
 
-            if (data['HARDWIRErequest'] === 1)
-            {
+            if (data['HARDWIRErequest'] === 1) {
                 hardwireContactor.style.color = "red";
-            }
-            else
-            {
+            } else {
                 hardwireContactor.style.color = "green";
             }
 
-            if (data['interlock'] === 1)
-            {
+            if (data['interlock'] === 1) {
                 interlockTripped.style.color = "red";
-            }
-            else
-            {
+            } else {
                 interlockTripped.style.color = "green";
             }
 
-            if (data['powerLoad'] === 1)
-            {
+            if (data['powerLoad'] === 1) {
                 loadPower.style.color = "red";
-            }
-            else
-            {
+            } else {
                 loadPower.style.color = "green";
             }
-            if (data['powerSource'] === 1)
-            {
+            if (data['powerSource'] === 1) {
                 sourcePower.style.color = "red";
-            }
-            else
-            {
+            } else {
                 sourcePower.style.color = "green";
             }
 
-            if (data['overVoltage'] === 1)
-            {
+            if (data['overVoltage'] === 1) {
                 overvoltage.style.color = "red";
-            }
-            else
-            {
+            } else {
                 overvoltage.style.color = "green";
             }
 
-            if (data['underVoltage'] === 1)
-            {
+            if (data['underVoltage'] === 1) {
                 undervoltage.style.color = "red";
-            }
-            else
-            {
+            } else {
                 undervoltage.style.color = "green";
             }
 
-            if (data['overTemperature'] === 1)
-            {
+            if (data['overTemperature'] === 1) {
                 overTemp.style.color = "red";
-            }
-            else
-            {
+            } else {
                 overTemp.style.color = "green";
             }
 
-            if (data['chargeOvercurrent'] === 1)
-            {
+            if (data['chargeOvercurrent'] === 1) {
                 chargeOC.style.color = "red";
-            }
-            else
-            {
+            } else {
                 chargeOC.style.color = "green";
             }
 
-            if (data['dischargeOverCurrent'] === 1)
-            {
+            if (data['dischargeOverCurrent'] === 1) {
                 dischargeOC.style.color = "red";
-            }
-            else
-            {
+            } else {
                 dischargeOC.style.color = "green";
             }
 
-            if (data['commFault'] === 1)
-            {
+            if (data['commFault'] === 1) {
                 batteryCommFault.style.color = "red";
-            }
-            else
-            {
+            } else {
                 batteryCommFault.style.color = "green";
             }
 
-            if (data['interlockTrip'] === 1)
-            {
+            if (data['interlockTrip'] === 1) {
                 interlockTripped.style.color = "red";
-            }
-            else
-            {
+            } else {
                 interlockTripped.style.color = "green";
             }
 
-            if (data['isoFault'] === 1)
-            {
+            if (data['isoFault'] === 1) {
                 isolationFault.style.color = "red";
-            }
-            else
-            {
+            } else {
                 isolationFault.style.color = "green";
             }
 
-            if (data['lowSOH'] === 1)
-            {
+            if (data['lowSOH'] === 1) {
                 lowSOH.style.color = "red";
-            }
-            else
-            {
+            } else {
                 lowSOH.style.color = "green";
             }
 
-            if (data['dischargeOC'] === 1)
-            {
+            if (data['dischargeOC'] === 1) {
                 dischargeOC.style.color = "red";
-            }
-            else
-            {
+            } else {
                 dischargeOC.style.color = "green";
             }
 
-            if (data['chargeOC'] === 1)
-            {
+            if (data['chargeOC'] === 1) {
                 chargeOC.style.color = "red";
-            }
-            else
-            {
+            } else {
                 chargeOC.style.color = "green";
             }
 
-            if (data['hotTemp'] === 1)
-            {
+            if (data['hotTemp'] === 1) {
                 hotTemp.style.color = "red";
-            }
-            else
-            {
+            } else {
                 hotTemp.style.color = "green";
             }
 
-            if (data['coldTemp'] === 1)
-            {
+            if (data['coldTemp'] === 1) {
                 coldTemp.style.color = "red";
-            }
-            else
-            {
+            } else {
                 coldTemp.style.color = "green";
             }
 
-            if (data['highVolt'] === 1)
-            {
+            if (data['highVolt'] === 1) {
                 highVoltage.style.color = "red";
                 batteryFull.style.color = "red";
-            }
-            else
-            {
+            } else {
                 highVoltage.style.color = "green";
                 batteryFull.style.color = "green"
             }
 
-            if (data['lowVolt'] === 1)
-            {
+            if (data['lowVolt'] === 1) {
                 lowVoltage.style.color = "red";
                 batteryLow.style.color = "red"
-            }
-            else
-            {
+            } else {
                 lowVoltage.style.color = "green";
                 batteryLow.style.color = "green";
             }
@@ -528,7 +465,7 @@ window.onload = function () {
     socket.on(
         'battery-voltage',
         function (data) {
-            
+
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battVoltage.innerHTML = data['packVoltage'];
@@ -546,7 +483,7 @@ window.onload = function () {
     socket.on(
         'battery-current',
         function (data) {
-            
+
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battCurrent.innerHTML = data['current'];
@@ -562,7 +499,7 @@ window.onload = function () {
     socket.on(
         'battery-soc',
         function (data) {
-            
+
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             battSOC.innerHTML = data['stateOfCharge'];
@@ -576,58 +513,40 @@ window.onload = function () {
 
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
-            
-            if (data['voltageLockOut'] === 1)
-            {
+
+            if (data['voltageLockOut'] === 1) {
                 voltageLockout.style.color = "red";
-            }
-            else
-            {
+            } else {
                 voltageLockout.style.color = "green";
             }
 
-            if (data['configError'] === 1)
-            {
+            if (data['configError'] === 1) {
                 configError.style.color = "red";
-            }
-            else
-            {
+            } else {
                 configError.style.color = "green";
             }
 
-            if (data['watchdogReset'] === 1)
-            {
+            if (data['watchdogReset'] === 1) {
                 watchdogReset.style.color = "red";
-            }
-            else
-            {
+            } else {
                 watchdogReset.style.color = "green";
             }
 
-            if (data['DCOverVoltage'] === 1)
-            {
+            if (data['DCOverVoltage'] === 1) {
                 dcOV.style.color = "red";
-            }
-            else
-            {
+            } else {
                 dcOV.style.color = "green";
             }
 
-            if (data['softwareOverCurrent'] === 1)
-            {
+            if (data['softwareOverCurrent'] === 1) {
                 softwareOC.style.color = "red";
-            }
-            else
-            {
+            } else {
                 softwareOC.style.color = "green";
             }
 
-            if (data['hardwareOverCurrent'] === 1)
-            {
+            if (data['hardwareOverCurrent'] === 1) {
                 hardwareOC.style.color = "red";
-            }
-            else
-            {
+            } else {
                 hardwareOC.style.color = "green";
             }
         }
@@ -635,8 +554,8 @@ window.onload = function () {
 
     socket.on(
         'motor-power',
-        function(data) {
-            
+        function (data) {
+
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             motorCurrent.innerHTML = data['busCurrent'];
@@ -646,19 +565,19 @@ window.onload = function () {
 
     socket.on(
         'motor-temperature',
-        function(data) {
-            
+        function (data) {
+
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             motorTemp.innerHTML = data['motorTemp'];
             mcTemp.innerHTML = data['motorControllerTemp'];
-            
+
         }
     );
 
     socket.on(
         'motor-velocity',
-        function(data) {
+        function (data) {
             lastTimestamp.innerHTML = data['timeStamp'];
             lastID.innerHTML = "0x".concat(data['ID'].toString(16));
             motorVelocity.innerHTML = data['velocity'];
@@ -667,46 +586,55 @@ window.onload = function () {
 
     socket.on(
         'current_coordinates',
-        function(data) {
+        function (data) {
             place_marker(data['currentLatitude'], data['currentLongitude']);
         }
     );
 
     socket.on(
         'path-directions',
-        function(data) {
+        function (data) {
 
             for (i = 0; i < data['points'].length; i++) {
                 place_breadcrumb(data['points'][i][0], data['points'][i][1]);
-            } 
+            }
 
         }
     );
 
     socket.on(
         'elevations',
-        function(data) {
+        function (data) {
             //console.log("elevation data received");
             updateElevationChart(data['elevations']);
         }
     );
 
+    function timer() {
+        var d = new Date();
+        var t = d.toLocaleTimeString();
+        current_time.innerHTML = t;
+    }
+
+    setInterval(timer, 1000);
+
     socket.on(
         'weather-forecast',
-        function(data) {
+        function (data) {
 
-            current_time.innerHTML = dateFormat(data['update_time']);
+            // current_time.innerHTML = setInterval( dateFormat(data['update_time']), 1000);
+            
             sunrise_time.innerHTML = dateFormat(data['sunrise_time']);
             sunset_time.innerHTML = dateFormat(data['sunset_time']);
-        
-            fc_temp_0.innerHTML = Math.round(data['temperature'][0] * 100)/100;
-            fc_temp_3.innerHTML = Math.round(data['temperature'][1] * 100)/100;
-            fc_temp_6.innerHTML = Math.round(data['temperature'][2] * 100)/100;
+
+            fc_temp_0.innerHTML = Math.round(data['temperature'][0] * 100) / 100;
+            fc_temp_3.innerHTML = Math.round(data['temperature'][1] * 100) / 100;
+            fc_temp_6.innerHTML = Math.round(data['temperature'][2] * 100) / 100;
 
             fc_cloud_0.innerHTML = data['cloud_cover'][0];
             fc_cloud_3.innerHTML = data['cloud_cover'][1];
             fc_cloud_6.innerHTML = data['cloud_cover'][2];
-    
+
             fc_wind_0.innerHTML = data['wind_speed'][0] + " , " + data['wind_direction'][0];
             fc_wind_3.innerHTML = data['wind_speed'][1] + " , " + data['wind_direction'][1];
             fc_wind_6.innerHTML = data['wind_speed'][2] + " , " + data['wind_direction'][2];
@@ -724,13 +652,13 @@ window.onload = function () {
 
     function dateFormat(unix_time) {
 
+
         var date = new Date(unix_time * 1000);
         var hours = date.getHours();
         var minutes = "0" + date.getMinutes();
         var seconds = "0" + date.getSeconds();
 
         var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-
         return formattedTime;
 
     }
@@ -740,7 +668,7 @@ window.onload = function () {
     */
 
     function updateElevationChart(elevations) {
-        for (i=0; i<elevations.length; i++) {
+        for (i = 0; i < elevations.length; i++) {
             elevationChart.data.labels.push(i);
             elevationChart.data.datasets[0].data.push(elevations[i]);
         }
@@ -779,10 +707,18 @@ window.onload = function () {
 
         if (timeDiff < 0.005) {
             valid = true;
-            return {data, timeStamp, valid};
+            return {
+                data,
+                timeStamp,
+                valid
+            };
         }
 
-        return {data, timeStamp, valid};
+        return {
+            data,
+            timeStamp,
+            valid
+        };
     }
 
 
@@ -793,7 +729,7 @@ window.onload = function () {
 
     var tempTimeCount = 0;
 
-    setInterval(function() {
+    setInterval(function () {
         let data = Math.floor(Math.random() * 100) + 1;
         let chartData = getData(data, tempTimeCount);
 
@@ -820,5 +756,3 @@ window.onload = function () {
 
 
 }
-
-
