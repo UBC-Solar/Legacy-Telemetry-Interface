@@ -150,9 +150,9 @@ def simulate_driving_to_sfu():
 import requests
 
 data = {}
-data['id'] = 0x627
+data['id'] = 0x624
 data['data'] = [0x10, 0x64, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70]
-data['timestamp'] = 868;
+data['timestamp'] = 556;
 
 r = requests.post('http://localhost:3000', json=data)
 

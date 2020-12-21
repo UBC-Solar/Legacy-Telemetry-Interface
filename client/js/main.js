@@ -754,5 +754,64 @@ window.onload = function () {
         tempTimeCount += 0.5;
     }, 500);
 
+    // ==========================================================================
+
+    socket.on("render-all", () => {
+        localStorage.setItem("ID", "all");
+    });
+
+    socket.on('battery-faults-history', (data) => {
+        console.log(data);
+        localStorage.setItem("ID", JSON.stringify(data.ID));  
+        localStorage.setItem("battery-faults-history", JSON.stringify(data));
+    });
+
+    socket.on('battery-voltage-history', (data) => {
+        console.log(data);
+        sessionStorage.setItem('battery-voltage-history', data);
+    });
+
+    socket.on('battery-current-history', (data) => {
+        localStorage.setItem("ID", JSON.stringify(data.ID));
+        localStorage.setItem("battery-current-history", JSON.stringify(data));
+    });
+
+    socket.on('battery-soc-history', (data) => {
+        console.log(data);
+        sessionStorage.setItem('battery-soc-history', data);
+    });
+
+    socket.on('battery-temperature-history', (data) => {
+        console.log(data);
+        localStorage.setItem("ID", data.ID);
+        sessionStorage.setItem('battery-temperature-history', data);
+    });
+
+    socket.on('motor-faults-history', (data) => {
+        console.log(data);
+        sessionStorage.setItem('motor-faults-history', data);
+    });
+
+
+    socket.on('motor-power-history', (data) => {
+        console.log(data);
+        sessionStorage.setItem('motor-power-history', data);
+    });
+
+    socket.on('motor-velocity-history', (data) => {
+        console.log(data);
+        sessionStorage.setItem('motor-velocity-history', data);
+    });
+
+    socket.on('motor-temperature-history', (data) => {
+        console.log(data);
+        sessionStorage.setItem('motor-temperature-history', data);
+    });
+
+    socket.on('current-coordinates-history', (data) => {
+        console.log(data);
+        sessionStorage.setItem('current-coordinates-history', data);
+    });
+
 
 }

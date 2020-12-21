@@ -10,6 +10,10 @@ const polyUtil = require('polyline-encoded');
 const io = require('socket.io')(server);
 const parser = require('./CAN_Parser/CANparse');
 const port = process.env.PORT || 3000;
+// const port2 = 80;
+// const app2 = express();
+// const server2 = http.createServer(app2)
+// const io2 = require('socket.io')(server2); 
 
 // ================================ from app.js
 const bodyParser = require("body-parser");
@@ -37,12 +41,20 @@ server.listen(
     }
 );
 
+// server2.listen(
+//     port2,
+//     function () {
+//         console.log('server2 listening at port %d', port2);
+//     }
+// );
+
 app.use(express.static(path.join(__dirname, '/client'))); 
+
+// app2.use(express.static(path.join(__dirname, '/client')))
 
 // ========================== from app.js
 app.get('/history', (req, res) => {
     res.sendFile(__dirname + '/client/history.html');
-    // res.send("History page :)" );
 });
 
 app.post("/history", (req, res)=> {
@@ -55,12 +67,12 @@ app.post("/history", (req, res)=> {
                 debug("Error querying database", err);
                 res.send("No data found :(" );
             } else {
-                console.log(msgs);
                 res.sendFile(__dirname + '/client/history.html');
-                msgs.forEach(msg => {
-                    const data = parser.canParser(msg);
-                    renderData(data);
-                });
+                // msgs.forEach(msg => {
+                //     const data = parser.canParser(msg);
+                //     renderData(data);
+                // });
+                renderAll(msgs);
             }
         });
     } else {
@@ -151,7 +163,6 @@ function renderData(data) {
         io.emit('battery-soc-history', data);
     } else if (data.ID === 0x627) {
         io.emit('battery-temperature-history', data);
-        console.log("rendering");
     } else if (data.ID === 0x401) {
         io.emit('motor-faults-history', data);
     } else if (data.ID === 0x402) {
@@ -163,6 +174,16 @@ function renderData(data) {
     } else if (data.ID === 0x800) {
         io.emit('current-coordinates-history', data);
     }
+}
+
+function renderAll(msgs) {
+    msgs.forEach(msg => {
+        const data = parser.canParser(msg);
+        renderData(data);
+        console.log("========");
+    });
+    io.emit("render-all");
+    console.log("---------");
 }
 
 function parseDataID(dataName) {
