@@ -10,10 +10,6 @@ const polyUtil = require('polyline-encoded');
 const io = require('socket.io')(server);
 const parser = require('./CAN_Parser/CANparse');
 const port = process.env.PORT || 3000;
-// const port2 = 80;
-// const app2 = express();
-// const server2 = http.createServer(app2)
-// const io2 = require('socket.io')(server2); 
 
 // ================================ from app.js
 const bodyParser = require("body-parser");
@@ -25,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const uri = "mongodb+srv://JasonLi:771011@telemetryinterface1.zsqxn.mongodb.net/test?retryWrites=true&w=majority";
 const uriLocal = "mongodb://localhost:27017/ubc-solar-telemetry-interface";
-mongoose.connect(uriLocal, {
+mongoose.connect(uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -35,7 +31,7 @@ mongoose.connect(uriLocal, {
     })
     .catch((err) => debug("Error connecting to database", err));
 // ================================
-
+ 
 server.listen(
     port,
     function () {
@@ -43,16 +39,15 @@ server.listen(
     }
 );
 
-// server2.listen(
-//     port2,
-//     function () {
-//         console.log('server2 listening at port %d', port2);
-//     }
-// );
 
 app.use(express.static(path.join(__dirname, '/client'))); 
 
-// app2.use(express.static(path.join(__dirname, '/client')))
+const message1 = new Message({
+    id: 1572,
+    data: [0,120,0,0,0,0,0],
+    timestamp: 555
+}, (err) => {if (err) console.log("Saving failed!");});
+message1.save();
 
 // ========================== from app.js
 app.get('/history', (req, res) => {
@@ -70,10 +65,6 @@ app.post("/history", (req, res)=> {
                 res.send("No data found :(" );
             } else {
                 res.sendFile(__dirname + '/client/history.html');
-                // msgs.forEach(msg => {
-                //     const data = parser.canParser(msg);
-                //     renderData(data);
-                // });
                 renderAll(msgs);
             }
         });
