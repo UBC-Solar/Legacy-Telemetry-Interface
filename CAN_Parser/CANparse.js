@@ -1,7 +1,7 @@
 exports.canParser = function parseRaw(receive) {
-    var id = receive["id"];
-    var message = receive["data"];
-    var milli = receive["timestamp"];
+    var id = receive.id;
+    var message = receive.data;
+    var milli = receive.timestamp;
 
     //Msg 0x622, Battery Faults + Warnings
     if (id == 0x622) {
@@ -216,9 +216,24 @@ exports.canParser = function parseRaw(receive) {
 
         return send;
 
-    }
+    } else if (id == 0x800) {
+        
+        //GPS coordinates
+        //TODO: Eventually, CAN messages will be sent instead of mock    
+        var current_latitude = receive["current_latitude"];
+        var current_longitude = receive["current_longitude"];
     
-    else {
+        var send = 
+        {
+            "ID": 0x800,
+            "timeStamp": milli,
+            "currentLatitude": current_latitude,
+            "currentLongitude": current_longitude
+        }
+        
+        return send;
+    
+    } else {
 
         var send = {
 
