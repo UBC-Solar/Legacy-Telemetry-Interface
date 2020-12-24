@@ -19,7 +19,7 @@ const Message = require('./models/message');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
 
-const uri = "mongodb+srv://JasonLi:771011@telemetryinterface1.zsqxn.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://JasonLi:771011@telemetryinterface1.zsqxn.mongodb.net/test2?retryWrites=true&w=majority";
 const uriLocal = "mongodb://localhost:27017/ubc-solar-telemetry-interface";
 mongoose.connect(uri, {
         useNewUrlParser: true,
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, '/client')));
 const message1 = new Message({
     id: 1572,
     data: [0,120,0,0,0,0,0],
-    timestamp: 555
+    timestamp: 666
 }, (err) => {if (err) console.log("Saving failed!");});
 message1.save();
 

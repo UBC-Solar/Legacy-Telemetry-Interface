@@ -152,8 +152,10 @@ import requests
 data = {}
 data['id'] = 0x624
 data['data'] = [0x10, 0x64, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70]
-data['timestamp'] = 556;
+data['timestamp'] = 111;
 
-r = requests.post('http://localhost:3000', json=data)
+# r = requests.post('http://localhost:3000', json=data)
+r = requests.post('https://ubcsolar-telemetry-interface.herokuapp.com', json=data)
+
 
 print(r.status_code);
