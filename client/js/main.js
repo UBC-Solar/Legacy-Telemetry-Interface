@@ -768,7 +768,8 @@ window.onload = function () {
 
     socket.on('battery-voltage-history', (data) => {
         console.log(data);
-        sessionStorage.setItem('battery-voltage-history', data);
+        localStorage.setItem("ID", data.ID);
+        localStorage.setItem('battery-voltage-history', JSON.stringify(data));
     });
 
     socket.on('battery-current-history', (data) => {
@@ -778,39 +779,39 @@ window.onload = function () {
 
     socket.on('battery-soc-history', (data) => {
         console.log(data);
-        sessionStorage.setItem('battery-soc-history', data);
+        localStorage.setItem('battery-soc-history', JSON.stringify(data));
     });
 
     socket.on('battery-temperature-history', (data) => {
         console.log(data);
         localStorage.setItem("ID", data.ID);
-        sessionStorage.setItem('battery-temperature-history', data);
+        localStorage.setItem('battery-temperature-history', JSON.stringify(data));
     });
 
     socket.on('motor-faults-history', (data) => {
         console.log(data);
-        sessionStorage.setItem('motor-faults-history', data);
+        localStorage.setItem('motor-faults-history', JSON.stringify(data));
     });
 
 
     socket.on('motor-power-history', (data) => {
         console.log(data);
-        sessionStorage.setItem('motor-power-history', data);
+        localStorage.setItem('motor-power-history', JSON.stringify(data));
     });
 
     socket.on('motor-velocity-history', (data) => {
         console.log(data);
-        sessionStorage.setItem('motor-velocity-history', data);
+        localStorage.setItem('motor-velocity-history', JSON.stringify(data));
     });
 
     socket.on('motor-temperature-history', (data) => {
         console.log(data);
-        sessionStorage.setItem('motor-temperature-history', data);
+        localStorage.setItem('motor-temperature-history', JSON.stringify(data));
     });
 
     socket.on('current-coordinates-history', (data) => {
         console.log(data);
-        sessionStorage.setItem('current-coordinates-history', data);
+        localStorage.setItem('current-coordinates-history', JSON.stringify(data));
     });
 
 

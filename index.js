@@ -23,7 +23,9 @@ const Message = require('./models/message');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
 
-mongoose.connect("mongodb://localhost:27017/ubc-solar-telemetry-interface", {
+const uri = "mongodb+srv://JasonLi:771011@telemetryinterface1.zsqxn.mongodb.net/test?retryWrites=true&w=majority";
+const uriLocal = "mongodb://localhost:27017/ubc-solar-telemetry-interface";
+mongoose.connect(uriLocal, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

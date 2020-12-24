@@ -3,15 +3,6 @@
 // This JS file is handling the post request that is 
 // fetching the old data.
 
-// const a = document.querySelector("#battery-vol");
-// const b = document.querySelector("#max-cell-vol");
-// const c = document.querySelector("#min-cell-vol");
-// console.log(a);
-
-// a.innerHTML = "2";
-// b.innerHTML = "3";
-// c.innerHTML = "4";
-
 window.onload = () => {
     const $ = document.querySelector.bind(document);
     const lastTimestamp = $("#time-stamp");
@@ -87,20 +78,21 @@ window.onload = () => {
     else id = dataID;
 
     console.log(id);
-    console.log(JSON.parse(localStorage.getItem("battery-current-history")));
+    console.log(JSON.parse(localStorage.getItem("motor-faults-history")));
     renderContent(id);
-    console.log("~~~~~~~~~~~");
+    localStorage.clear();
+    console.log("clearing");
     function renderContent(id) {
         if (id == "all") {
-            // renderBattFaults();
-            // renderBattVol();
+            renderBattFaults();
+            renderBattVol();
             renderBattCurrent();
-            // renderBattSoc();
-            // renderBattTemp();
-            // renderMotorFaults();
-            // renderMotorPower();
-            // renderMotorVelocity();
-            // renderMotorTemp();
+            renderBattSoc();
+            renderBattTemp();
+            renderMotorFaults();
+            renderMotorPower();
+            renderMotorVelocity();
+            renderMotorTemp();
         } else {
             if (id === 0x622) {
                 renderBattFaults();
@@ -125,7 +117,7 @@ window.onload = () => {
     }
 
     function renderBattFaults() {
-        const data = JSON.parse(localStorage.getItem("battery-fault-history"));
+        const data = JSON.parse(localStorage.getItem("battery-faults-history"));
         lastTimestamp.innerHTML = data.timeStamp;
 
         if (data.relayFault === 1) {
@@ -352,7 +344,7 @@ window.onload = () => {
             watchdogReset.style.color = "green";
         }
 
-        if (dataDCOverVoltage === 1) {
+        if (data.DCOverVoltage === 1) {
             dcOV.style.color = "red";
         } else {
             dcOV.style.color = "green";
@@ -376,6 +368,7 @@ window.onload = () => {
         lastTimestamp.innerHTML = data.timeStamp;
         motorCurrent.innerHTML = data.busCurrent;
         motorVoltage.innerHTML = data.busVoltage;
+        console.log("------");
     }
 
     function renderMotorVelocity() {
@@ -390,4 +383,4 @@ window.onload = () => {
         motorTemp.innerHTML = data.motorTemp;
         mcTemp.innerHTML = data.motorControllerTemp;
     }
-}
+};
