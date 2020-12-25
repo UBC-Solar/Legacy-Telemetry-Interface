@@ -365,6 +365,14 @@ td {
     opacity: 1;
 }
 
+.form-group select, input {
+    border: none;
+    border-radius: .4rem;
+    border-color: aquamarine;
+    margin: 0.5rem 0;
+}
+
+
 
 /* Making this stuff responsive for smaller screen sizes */
 @media only screen and (max-width: 800px) {
