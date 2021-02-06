@@ -19,7 +19,7 @@ const Message = require('./models/message');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
 
-const uri = "mongodb+srv://JasonLi:771011@telemetryinterface1.zsqxn.mongodb.net/test2?retryWrites=true&w=majority";
+const uri = "mongodb://mongo:27017/solar";
 const uriLocal = "mongodb://localhost:27017/ubc-solar-telemetry-interface";
 mongoose.connect(uri, {
         useNewUrlParser: true,
@@ -29,7 +29,10 @@ mongoose.connect(uri, {
         debug("Successfully connected to UBC Solar MongoDB");
         console.log("Data base connected");
     })
-    .catch((err) => debug("Error connecting to database", err));
+    .catch((err) => {
+        console.log(err)
+        debug("Error connecting to database", err);
+    });
 // ================================
  
 server.listen(

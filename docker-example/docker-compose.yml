@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+    web:
+        container_name: web
+        image: teamriot/solar-telem
+        ports:
+            - '80:3000'
+        links:
+            - mongo
+            
+    mongo:
+        container_name: mongo
+        image: mongo
+        volumes:
+            - ./mongo-volume:/data/db
