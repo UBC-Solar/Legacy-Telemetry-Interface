@@ -144,18 +144,18 @@ def simulate_driving_to_sfu():
 
 
 
-# simulate_driving_to_sfu()
+simulate_driving_to_sfu()
 
 
 import requests
 
 data = {}
-data['id'] = 0x624
-data['data'] = [0x10, 0x64, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70]
-data['timestamp'] = 111;
+data['id'] = 0x40B
+data['data'] = [0x100, 0x100, 0x90, 0x30, 0x78, 0x88, 0x60, 0x70]
+data['timestamp'] = 333
 
-# r = requests.post('http://localhost:3000', json=data)
-r = requests.post('https://ubcsolar-telemetry-interface.herokuapp.com', json=data)
+r = requests.post('http://localhost:3000', json=data)
+# r = requests.post('https://ubcsolar-telemetry-interface.herokuapp.com', json=data)
 
 
 print(r.status_code);

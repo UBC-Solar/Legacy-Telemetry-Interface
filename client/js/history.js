@@ -71,7 +71,7 @@ window.onload = () => {
     //     path: '/history'
     // });
     const dataID = localStorage.getItem("ID");
-    console.log(dataID);
+    // console.log(dataID);
     var id;
 
     if (dataID != 'all') id = JSON.parse(dataID);
@@ -80,8 +80,8 @@ window.onload = () => {
     console.log(id);
     console.log(JSON.parse(localStorage.getItem("motor-faults-history")));
     renderContent(id);
-    localStorage.clear();
-    console.log("clearing");
+    // localStorage.clear();
+    // console.log("clearing");
     function renderContent(id) {
         if (id == "all") {
             renderBattFaults();
@@ -296,91 +296,109 @@ window.onload = () => {
 
     function renderBattVol() {
         const data = JSON.parse(localStorage.getItem("battery-voltage-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
-        battVoltage.innerHTML = data.packVoltage;
-        battMaxCellVoltage.innerHTML = data.maxVoltage;
-        battMinCellVoltage.innerHTML = data.minVoltage;
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
+            battVoltage.innerHTML = data.packVoltage;
+            battMaxCellVoltage.innerHTML = data.maxVoltage;
+            battMinCellVoltage.innerHTML = data.minVoltage;
+        }
+
     }
 
     function renderBattCurrent() {
         const data = JSON.parse(localStorage.getItem("battery-current-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
-        battCurrent.innerHTML = data.current;
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
+            battCurrent.innerHTML = data.current;
+        }
+
     }
 
     function renderBattSoc() {
         const data = JSON.parse(localStorage.getItem("battery-soc-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
-        battSOC.innerHTML = data.stateOfCharge;
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
+            battSOC.innerHTML = data.stateOfCharge + "%";
+        }
     }
 
     function renderBattTemp() {
-        const data = JSON.parse(localStorage.getItem("battery-soc-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
-        battMaxTemp.innerHTML = data.maxTemp;
-        battMinTemp.innerHTML = data.minTemp;
-        battAveTemp.innerHTML = data.temperature;
+        const data = JSON.parse(localStorage.getItem("battery-temperature-history"));
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
+            battMaxTemp.innerHTML = data.maxTemp;
+            battMinTemp.innerHTML = data.minTemp;
+            battAveTemp.innerHTML = data.temperature;
+        }
     }
 
     function renderMotorFaults() {
         const data = JSON.parse(localStorage.getItem("motor-faults-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
 
-        if (data.voltageLockOut === 1) {
-            voltageLockout.style.color = "red";
-        } else {
-            voltageLockout.style.color = "green";
-        }
-
-        if (data.configError === 1) {
-            configError.style.color = "red";
-        } else {
-            configError.style.color = "green";
-        }
-
-        if (data.watchdogReset === 1) {
-            watchdogReset.style.color = "red";
-        } else {
-            watchdogReset.style.color = "green";
-        }
-
-        if (data.DCOverVoltage === 1) {
-            dcOV.style.color = "red";
-        } else {
-            dcOV.style.color = "green";
-        }
-
-        if (data.softwareOverCurrent === 1) {
-            softwareOC.style.color = "red";
-        } else {
-            softwareOC.style.color = "green";
-        }
-
-        if (data.hardwareOverCurrent === 1) {
-            hardwareOC.style.color = "red";
-        } else {
-            hardwareOC.style.color = "green";
+            if (data.voltageLockOut === 1) {
+                voltageLockout.style.color = "red";
+            } else {
+                voltageLockout.style.color = "green";
+            }
+    
+            if (data.configError === 1) {
+                configError.style.color = "red";
+            } else {
+                configError.style.color = "green";
+            }
+    
+            if (data.watchdogReset === 1) {
+                watchdogReset.style.color = "red";
+            } else {
+                watchdogReset.style.color = "green";
+            }
+    
+            if (data.DCOverVoltage === 1) {
+                dcOV.style.color = "red";
+            } else {
+                dcOV.style.color = "green";
+            }
+    
+            if (data.softwareOverCurrent === 1) {
+                softwareOC.style.color = "red";
+            } else {
+                softwareOC.style.color = "green";
+            }
+    
+            if (data.hardwareOverCurrent === 1) {
+                hardwareOC.style.color = "red";
+            } else {
+                hardwareOC.style.color = "green";
+            }
         }
     }
 
     function renderMotorPower() {
         const data = JSON.parse(localStorage.getItem("motor-power-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
-        motorCurrent.innerHTML = data.busCurrent;
-        motorVoltage.innerHTML = data.busVoltage;
-        console.log("------");
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
+            motorCurrent.innerHTML = data.busCurrent;
+            motorVoltage.innerHTML = data.busVoltage;
+            console.log("------");
+        }
     }
 
     function renderMotorVelocity() {
         const data = JSON.parse(localStorage.getItem("motor-velocity-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
-        motorVelocity.innerHTML = data.velocity;
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
+            motorVelocity.innerHTML = data.velocity;
+        }
     }
 
     function renderMotorTemp() {
         const data = JSON.parse(localStorage.getItem("motor-temperature-history"));
-        lastTimestamp.innerHTML = data.timeStamp;
-        motorTemp.innerHTML = data.motorTemp;
-        mcTemp.innerHTML = data.motorControllerTemp;
+        if (data) {
+            lastTimestamp.innerHTML = data.timeStamp;
+            motorTemp.innerHTML = data.motorTemp;
+            mcTemp.innerHTML = data.motorControllerTemp;
+        }
     }
 };

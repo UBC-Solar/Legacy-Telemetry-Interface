@@ -107,3 +107,4 @@ dist
 
 # OS X related files
 .DS_Store
+./.vscode

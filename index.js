@@ -42,13 +42,6 @@ server.listen(
 
 app.use(express.static(path.join(__dirname, '/client'))); 
 
-const message1 = new Message({
-    id: 1572,
-    data: [0,120,0,0,0,0,0],
-    timestamp: 666
-}, (err) => {if (err) console.log("Saving failed!");});
-message1.save();
-
 // ========================== from app.js
 app.get('/history', (req, res) => {
     res.sendFile(__dirname + '/client/history.html');

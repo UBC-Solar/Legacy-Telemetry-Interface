@@ -779,6 +779,7 @@ window.onload = function () {
 
     socket.on('battery-soc-history', (data) => {
         console.log(data);
+        localStorage.setItem("ID", data.ID);
         localStorage.setItem('battery-soc-history', JSON.stringify(data));
     });
 
@@ -790,27 +791,32 @@ window.onload = function () {
 
     socket.on('motor-faults-history', (data) => {
         console.log(data);
+        localStorage.setItem("ID", data.ID);
         localStorage.setItem('motor-faults-history', JSON.stringify(data));
     });
 
 
     socket.on('motor-power-history', (data) => {
         console.log(data);
+        localStorage.setItem("ID", data.ID);
         localStorage.setItem('motor-power-history', JSON.stringify(data));
     });
 
     socket.on('motor-velocity-history', (data) => {
         console.log(data);
+        localStorage.setItem("ID", data.ID);
         localStorage.setItem('motor-velocity-history', JSON.stringify(data));
     });
 
     socket.on('motor-temperature-history', (data) => {
         console.log(data);
+        localStorage.setItem("ID", data.ID);
         localStorage.setItem('motor-temperature-history', JSON.stringify(data));
     });
 
     socket.on('current-coordinates-history', (data) => {
         console.log(data);
+        localStorage.setItem("ID", data.ID);
         localStorage.setItem('current-coordinates-history', JSON.stringify(data));
     });
 
